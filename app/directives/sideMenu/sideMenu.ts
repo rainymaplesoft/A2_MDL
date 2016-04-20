@@ -1,5 +1,5 @@
 import {Component, OnInit, OnChanges} from 'angular2/core';
-import {MenuService} from "../../services/menuService";
+import {LayoutService} from "../../services/layoutService";
 import {MenuLink} from "./menuLink";
 import {MenuToggle} from "./menuToggle";
 
@@ -18,7 +18,7 @@ export interface IMenuSection {
 })
 
 export class SideMenu implements OnInit,OnChanges {
-    constructor(private _menuService:MenuService) {
+    constructor(private _menuService:LayoutService) {
     }
 
     sideMenuWidth:number = 320;
@@ -28,7 +28,7 @@ export class SideMenu implements OnInit,OnChanges {
     menu:IMenuSection[] = this.GetMenuSections();
 
     ngOnInit():any {
-        this._menuService.isLockedOpen = true;
+        this._menuService.isSideMenuLockedOpen = true;
         this._menuService.closeSideMenu = ()=> {
             this.sideMenuWidth = this.sideMenuWidth === 0 ? 320 : 0;
             this.isHideSideMenu = !this.isHideSideMenu;

@@ -4,7 +4,7 @@
           [ngClass]="{'toggled' : isOpen()}">
     </span>
 </button>
-<ul *ngIf= "isOpen()" class="menu-toggle-list" >
+<ul *ngIf= "isMenuSectionOpen" class="menu-toggle-list" >
     <li *ngFor="#page of section.pages">
         <menu-link [section] ="page"></menu-link>
     </li>

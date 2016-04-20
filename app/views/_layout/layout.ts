@@ -1,13 +1,13 @@
 import {Component} from 'angular2/core';
 import {SideMenu} from "../../directives/sideMenu/sideMenu";
 import {StudentList} from "../studentList/studentList";
-import {MenuService} from "../../services/menuService";
+import {LayoutService} from "../../services/layoutService";
 
 @Component({
     selector: 'layout',
     templateUrl:'app/views/_layout/layout.html',
     directives: [SideMenu, StudentList],
-    providers:[MenuService]
+    providers:[LayoutService]
 })
 export class Layout {
 }

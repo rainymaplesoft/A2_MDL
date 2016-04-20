@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from 'angular2/core';
-import {MenuService} from "../../services/menuService";
+import {LayoutService} from "../../services/layoutService";
 import {IMenuSection} from "./sideMenu";
 import {MDL} from "../mdl/mdl";
 
@@ -13,7 +13,7 @@ export class MenuLink implements OnInit {
 
     @Input() section:IMenuSection;
 
-    constructor(private _menuService:MenuService) {
+    constructor(private _layoutService:LayoutService) {
     }
     ngOnInit():any {
         return undefined;

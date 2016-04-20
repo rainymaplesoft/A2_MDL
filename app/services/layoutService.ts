@@ -2,9 +2,9 @@ import {Injectable} from 'angular2/core';
 import {IMenuSection} from "../directives/sideMenu/sideMenu";
 
 @Injectable()
-export class MenuService {
-    isLockedOpen:boolean;
-    isOpen:boolean;
+export class LayoutService {
+    isSideMenuLockedOpen:boolean;
+    //isSideMenuOpen:boolean;
     openedMenuSection:IMenuSection;
 
     closeSideMenu():void {
@@ -17,7 +17,7 @@ export class MenuService {
         return this.openedMenuSection === section;
     }
     
-    toggleOpen(section:IMenuSection):void {
+    toggleOpenMenuSection(section:IMenuSection):void {
         this.openedMenuSection = this.openedMenuSection === section ? null : section;
     }
 }
