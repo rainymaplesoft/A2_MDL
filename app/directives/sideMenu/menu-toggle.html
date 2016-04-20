@@ -1,0 +1,11 @@
+<button mdl class="menu-button mdl-button mdl-js-button mdl-js-ripple-effect flex_row" (click)="toggle()">
+    {{section.name}}
+    <span aria-hidden="true" class=""
+          [ngClass]="{'toggled' : isOpen()}">
+    </span>
+</button>
+<ul *ngIf= "isOpen()" class="menu-toggle-list" >
+    <li *ngFor="#page of section.pages">
+        <menu-link [section] ="page"></menu-link>
+    </li>
+</ul>

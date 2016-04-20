@@ -1,0 +1,22 @@
+{
+  "name": "a2_mdl",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "jgli <jgli@pcgus.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-design-lite": "^1.1.3",
+    "material-design-icons": "^2.2.3",
+    "jquery": "^2.2.3"
+  }
+}

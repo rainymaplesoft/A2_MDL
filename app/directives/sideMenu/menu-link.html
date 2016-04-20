@@ -1,0 +1,5 @@
+<button mdl class="menu-button mdl-button mdl-js-button mdl-js-ripple-effect"
+        [ngClass]="{'route-active':isRouteActive}" (click)="selectItem()">
+    {{section.name}}
+    <!--<span class="md-visually-hidden" ng-if="isSelected()">current page</span>-->
+</button>

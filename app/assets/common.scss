@@ -1,0 +1,97 @@
+/* --- general adjustment --- */
+
+/* hide any cloaked element until it is rendered with value */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+input:active, a:active, input:focus, a:focus, th:focus, tr:focus, td:focus {
+  outline: none;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button,
+input[type=number]:hover::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  opacity: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  opacity: 0;
+}
+
+/* --- end of general adjustment --- */
+
+/* --- mixin --- */
+
+@mixin display-flex() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-direction($dir) {
+  -ms-flex-direction: $dir;
+  -webkit-flex-direction: $dir;
+  flex-direction: $dir;
+}
+
+@mixin flex-grow($grow) {
+  -webkit-flex-grow: $grow;
+  flex-grow: $grow;
+}
+
+@mixin align-items($value) {
+  -webkit-align-items: $value;
+  align-items: $value;
+}
+@mixin justify-content($value) {
+  -webkit-justify-content: $value;
+  justify-content: $value;
+}
+
+/* --- end of mixin --- */
+
+
+/* --- flex --- */
+.flex {
+  @include display-flex();
+}
+
+.flex_row {
+  @extend .flex;
+  @include flex-direction(row)
+}
+
+.flex_column {
+  @extend .flex;
+  @include flex-direction(column)
+}
+
+.flex_column_shrink_center {
+  @extend .flex_column;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.flex_column_all_center {
+  @extend .flex_column_shrink_center;
+  @include justify-content(center);
+}
+
+.flex_row_shrink_center {
+  @extend .flex;
+  @include align-items(center);
+}
+
+.flex_row_all_center {
+  @extend .flex_row_shrink_center;
+  @include justify-content(center);
+}
+
+/* --- end of flex --- */

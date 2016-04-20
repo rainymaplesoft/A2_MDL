@@ -1,0 +1,149 @@
+@import "common";
+
+$color-primary-text:#212121;
+
+/* --- page styles --- */
+body{
+  overflow-y: hidden;
+}
+
+.layout-content{
+  @include display-flex();
+  min-height: 100%;
+  box-sizing: border-box;
+}
+/* --- end of page styles --- */
+
+.side-menu{
+  @include display-flex();
+  @include flex-direction(column);
+  position: static;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 60;
+  width: 320px;
+  max-width: 320px;
+  bottom: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  /*background-color: #DADADA;*/
+  height: 100%;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+  -webkit-transition-property: width; /* Safari */
+  -webkit-transition-duration: 2s; /* Safari */
+  transition-property: transform,-webkit-transform,width;
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  .toolbar{
+    @include display-flex();
+    @include flex-direction(column);
+    background-color: rgb(0,150,136);
+    color: rgb(255,255,255);
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    font-size: 20px;
+    min-height: 64px;
+    width: 100%;
+  }
+  .menu-content{
+    display: block;
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    color: rgba(0, 0, 0, 0.87);
+    /*background-color: #DADADA;*/
+
+    ul.menu-sections {
+      color:$color-primary-text;
+      list-style: none;
+      padding: 0;
+      margin-top: 0;
+
+      & > li {
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 0;
+      }
+
+      .menu-button  {
+        border-radius: 0;
+        color: inherit;
+        cursor: pointer;
+        font-weight: 400;
+        line-height: 40px;
+        margin: 0;
+        max-height: 40px;
+        overflow: hidden;
+        padding: 0px 16px;
+        text-align: left;
+        text-decoration: none;
+        white-space: normal;
+        width: 100%;
+        &.active {
+          color: deeppink;
+        }
+      }
+
+      .menu-toggle-list {
+        background: #fff;
+        max-height: 300px;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        -webkit-transition-property: max-height;
+        -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        -moz-transition-property: max-height;
+        transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+        transition-property: max-height;
+
+        &.ng-hide {
+          max-height: 0;
+        }
+        .md-button {
+          display: block;
+          padding: 0 16px 0 32px;
+          text-transform: none;
+        }
+        a.md-button {
+          display: block;
+          padding: 0 16px 0 32px;
+          text-transform: none;
+          text-rendering: optimizeLegibility;
+          font-weight: 500;
+        }
+      }
+
+      .button-toggle .md-toggle-icon {
+        background-size: 100% auto;
+        display: inline-block;
+        margin: auto 0 auto auto;
+        width: 15px;
+        color: darkgray;
+        transition: transform .3s ease-in-out;
+        -webkit-transition: -webkit-transform .3s ease-in-out;
+        &.toggled {
+          transform: rotateZ(180deg);
+          -webkit-transform: rotateZ(180deg);
+        }
+      }
+    }
+  }
+}
+
+.hide-side-menu{
+  width: 0;
+  transform: translateX(-320px);
+}
+
+.main-content{
+  @include flex-grow(1);
+}

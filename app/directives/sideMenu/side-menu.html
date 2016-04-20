@@ -1,0 +1,23 @@
+<div class="side-menu" [ngClass]="{'hide-side-menu':isHideSideMenu}">
+    <div class="toolbar flex_column_all_center">
+        <div class="flex_row">
+            <div><i class="material-icons">android</i></div>
+            <div [innerHtml]="menuTitle"></div>
+        </div>
+    </div>
+
+    <div class="menu-content">
+        <ul class="menu-sections">
+            <li *ngFor="#section of menu" class="parent-list-item"
+                [ngClass]="{'parentActive' : isSectionSelected(section)}">
+                <h2 class="menu-heading" *ngIf="section.type === 'heading'"
+                    id="heading_{{ section.name}}">
+                    {{section}}
+                </h2>
+                <menu-link [section]="section" *ngIf="section.type === 'link'"></menu-link>
+                <menu-toggle [section]="section" *ngIf="section.type === 'toggle'"></menu-toggle><!-- -->
+            </li>
+        </ul>
+
+    </div>
+</div>
