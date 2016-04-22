@@ -1,0 +1,11 @@
+<button mdl class="menu-button mdl-button mdl-js-button mdl-js-ripple-effect flex_row_shrink_center" (click)="toggle()">
+    <span>{{section.name}}</span>
+    <span class="flex_item_right toggle-icon" [ngClass]="{'toggled' : isOpen()}">
+        <i class="material-icons">keyboard_arrow_down</i>
+    </span>
+</button>
+<ul [ngClass]="{'ng-hide':!isOpen()}" class="menu-toggle-list">
+    <li *ngFor="#page of section.pages">
+        <menu-link [section]="page"></menu-link>
+    </li>
+</ul>

@@ -1,13 +1,13 @@
 import {Injectable} from 'angular2/core';
-import {IMenuSection} from "../directives/sideMenu/sideMenu";
+import {IMenuSection} from "../shared_components/sideMenu/sideMenu";
 
 @Injectable()
 export class LayoutService {
     isSideMenuLockedOpen:boolean;
-    //isSideMenuOpen:boolean;
     openedMenuSection:IMenuSection;
 
-    closeSideMenu():void {
+    toggleSideMenu():void {
+        // implemented in Class SideMenu 
     }
 
     openSideMenu():void {

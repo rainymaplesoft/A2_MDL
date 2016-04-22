@@ -5,7 +5,7 @@ import {MDL} from "../mdl/mdl";
 
 @Component({
     selector: 'menu-link',
-    templateUrl: 'app/directives/sideMenu/menu-link.html',
+    templateUrl: 'app/shared_components/sideMenu/menu-link.html',
     directives:[MDL]
 })
 

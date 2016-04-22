@@ -94,4 +94,13 @@ input[type=number]::-webkit-outer-spin-button {
   @include justify-content(center);
 }
 
+.flex_item_right{
+  margin-left: auto;
+}
+
 /* --- end of flex --- */
+
+.btn-transparent{
+  margin:0 5px;
+  cursor: pointer;
+}
