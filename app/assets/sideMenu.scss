@@ -24,6 +24,7 @@ $color-primary-text:#212121;
   transition-property: transform,-webkit-transform,width;
   transition-duration: .2s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
+  background-color: white;
   .toolbar{
     @include display-flex();
     @include flex-direction(column);
@@ -142,14 +143,34 @@ $color-primary-text:#212121;
   }
 }
 
+@media screen and (max-width: 959px) {
+  .side-menu.hide-lt-sm {
+    width: 0;
+    transform: translateX(-320px);
+    position: relative;
+    z-index:1;
+  }
+  .side-menu.show-lt-sm {
+    width: 320px;
+    position: absolute;
+    z-index:5;
+  }
+}
+@media screen and (min-width: 960px) {
+  .side-menu {
+    width: 320px;
+    position: relative;
+    z-index:1;
+  }
+}
+
+
+/*
 .hide-side-menu{
   width: 0;
   transform: translateX(-320px);
 }
-
-@media screen and (max-width: 959px) {
-  .side-menu {
-    width: 0;
-    transform: translateX(-320px);
-  }
-}
+.show-side-menu{
+  width: 320px!important;
+  transform: translateX(320px)!important;
+}*/

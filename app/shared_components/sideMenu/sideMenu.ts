@@ -14,30 +14,35 @@ export interface IMenuSection {
 @Component({
     selector: 'side-menu',
     templateUrl: 'app/shared_components/sideMenu/side-menu.html',
-    directives:[MenuLink,MenuToggle]
+    directives: [MenuLink, MenuToggle]
 })
 
 export class SideMenu implements OnInit,OnChanges {
-    constructor(private _menuService:LayoutService) {
+    constructor(private layoutService:LayoutService) {
     }
 
     sideMenuWidth:number = 320;
     menuTitle:string = 'Angular 2 with MDL';
-    isHideSideMenu:boolean = false;
+    isHideSideMenu:boolean = true;
     menu:IMenuSection[] = this.GetMenuSections();
 
     ngOnInit():any {
-        this._menuService.isSideMenuLockedOpen = true;
-        this._menuService.toggleSideMenu = ()=> {
+        this.layoutService.isSideMenuLockedOpen = true;
+        this.layoutService.toggleSideMenu = ()=> {
             this.sideMenuWidth = this.sideMenuWidth === 0 ? 320 : 0;
             this.isHideSideMenu = !this.isHideSideMenu;
-        }
+        };
+        this.layoutService.closeSideMenu = ()=> {
+            this.isHideSideMenu = true
+        };
+        this.layoutService.openSideMenu = ()=> {
+            this.isHideSideMenu = false
+        };
     }
 
     ngOnChanges(changes:{}):any {
         return undefined;
     }
-
 
 
     public GetMenuSections():IMenuSection[] {

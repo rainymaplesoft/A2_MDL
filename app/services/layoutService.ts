@@ -9,15 +9,29 @@ export class LayoutService {
     toggleSideMenu():void {
         // implemented in Class SideMenu 
     }
-
+    
+    closeSideMenu():void {
+        // implemented in Class SideMenu 
+    }
+    
     openSideMenu():void {
+        // implemented in Class SideMenu 
+    }
+
+    showBackDrop():void{
+        // implemented in Class BackDrop 
+    }
+
+    closeBackDrop():void{
+        // implemented in Class BackDrop 
     }
 
     isMenuSectionOpen(section:IMenuSection):boolean {
         return this.openedMenuSection === section;
     }
     
-    toggleOpenMenuSection(section:IMenuSection):void {
+    toggleMenuSection(section:IMenuSection):void {
         this.openedMenuSection = this.openedMenuSection === section ? null : section;
     }
+    
 }

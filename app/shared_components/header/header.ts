@@ -19,8 +19,8 @@ export class Header implements OnInit {
 
     }
     
-    toggleSideMenu():void {
-        console.log(this._layoutService);
-        this._layoutService.toggleSideMenu();
+    openSideMenu():void {
+        this._layoutService.openSideMenu();
+        this._layoutService.showBackDrop();
     }
 }

@@ -12,6 +12,7 @@ body{
   @include display-flex();
   min-height: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 /* --- end of page styles --- */
 

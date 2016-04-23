@@ -5,12 +5,13 @@ import {StudentList} from "../views/studentList/studentList";
 import {Constants} from "./constants";
 import {SideMenu} from "../shared_components/sideMenu/sideMenu";
 import {LayoutService} from "../services/layoutService";
+import {BackDrop} from "../shared_components/back-drop/backDrop";
 
 @Component({
     selector: 'app',
-    templateUrl:'app/_app/app.html',
-    directives: [ROUTER_DIRECTIVES, SideMenu],
-    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS,LayoutService]
+    templateUrl: 'app/_app/app.html',
+    directives: [ROUTER_DIRECTIVES, SideMenu, BackDrop],
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, LayoutService]
 })
 @RouteConfig([
     {

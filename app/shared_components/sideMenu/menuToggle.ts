@@ -26,6 +26,6 @@ export class MenuToggle implements OnInit {
     }
 
     toggle():void {
-        this._layoutService.toggleOpenMenuSection(this.section);
+        this._layoutService.toggleMenuSection(this.section);
     }
 }
