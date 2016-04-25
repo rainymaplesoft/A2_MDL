@@ -10,7 +10,7 @@ export class HttpService {
     getList<T>(url:string):Observable<T[]> {
         return this._http.get(url).map((response:Response)=><T[]>response.json())
             // for debug
-            .do(data=>console.log("All: " + JSON.stringify(data)))
+            //.do(data=>console.log("All: " + JSON.stringify(data)))
             .catch(this.handleError);
     }
 

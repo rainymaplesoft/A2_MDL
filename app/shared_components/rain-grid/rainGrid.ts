@@ -1,4 +1,4 @@
-import {Component, OnInit,OnChanges, Input, Output,EventEmitter} from 'angular2/core';
+import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
 import {LayoutService} from "../../services/layoutService";
 import {MDL} from "../mdl/mdl";
 import {IGridField, RainGridCell} from "./rainGridCell";
@@ -21,23 +21,32 @@ export interface IGridHeader {
 }
 
 export interface IGridRow {
-    fields: IGridField[], rowSelected: boolean, idField: string, id: string
+    fields:IGridField[], rowSelected:boolean, idField:string, id:string
 }
+
+export enum SortingOptions {NONE, ASC, DSC}
 
 @Component({
     selector: 'rain-grid',
     templateUrl: 'app/shared_components/rain-grid/rain-grid.html',
-    directives: [MDL,RainGridCell]
+    directives: [MDL, RainGridCell]
 })
 
 export class RainGrid<T> implements OnInit,OnChanges {
 
     @Input() grid_options:IGridOptions<T>;
     @Input() value:any;
-    @Output() cellClicked: EventEmitter<string>= new EventEmitter<string>();
+    @Output() cellClicked:EventEmitter<string> = new EventEmitter<string>();
 
     header:IGridHeader[];
     dataList:IGridRow[];
+    dataListOrigin:IGridRow[];
+    private _enablePaging:boolean = true;
+    private _selectedRow:IGridRow = null;
+    private _currentSortIndex:number = 0;
+    private _currentSortField:string = null;
+    private _isFiltered:boolean = false;
+    private _dataRowsFiltered = [];
 
     constructor(private _layoutService:LayoutService) {
     }
@@ -47,32 +56,30 @@ export class RainGrid<T> implements OnInit,OnChanges {
     }
 
     ngOnChanges(changes:{}):any {
-        if(!this.grid_options||!this.grid_options.columnSettings){
+        if (!this.grid_options || !this.grid_options.columnSettings) {
             return;
         }
-        this.header= this.buildHeader(this.grid_options.columnSettings);
-        this.dataList = this.buildGridData(this.grid_options);
+        this.header = this.buildHeader(this.grid_options.columnSettings);
+        this.dataListOrigin = this.buildGridData(this.grid_options);
+        this.dataList = this.getPageData();
     }
 
-    sortingChanged(fieldName:string):void{
+    selectRow(row:IGridRow):void {
 
     }
 
-    selectRow(row:IGridRow):void{
-
-    }
-    onClick():void{
+    onClick():void {
         this.cellClicked.emit(JSON.stringify(this.value));
     }
 
 
     buildHeader(columnSettings:Array<IGridField>):Array<IGridHeader> {
         var row = [];
-        for(let col of columnSettings){
+        for (let col of columnSettings) {
             row.push({
                 fieldName: col.fieldName,
                 displayName: col.displayName,
-                isHidden: col.isHidden||false
+                isHidden: col.isHidden || false
             });
         }
         return row;
@@ -89,7 +96,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
         if (dataList.length == 0) {
             return gridList;
         }
-        for (let rowData of dataList){
+        for (let rowData of dataList) {
             let fields:Array<IGridField> = [];
             if (!columnSettings) {
                 for (let property in rowData) {
@@ -98,11 +105,12 @@ export class RainGrid<T> implements OnInit,OnChanges {
                             {
                                 fieldName: property,
                                 value: rowData[property],
-                                displayName: property
+                                displayName: property,
+                                isHidden: false
                             });
                     }
                 }
-            }else {
+            } else {
                 idField = gridOptions.idField;
                 if (idField) {
                     id = rowData[gridOptions.idField];
@@ -137,4 +145,88 @@ export class RainGrid<T> implements OnInit,OnChanges {
 
         return gridList;
     }   // end of buildGridData
+
+
+    /*-- Sorting --*/
+
+    sortingChanged(fieldName:string):void {
+        console.log(fieldName);
+        var sortingOption = SortingOptions.NONE;
+        if (this._currentSortField !== fieldName) {
+            this._currentSortIndex = 1;
+            sortingOption = SortingOptions.ASC;
+        } else {
+            this._currentSortIndex = this._currentSortIndex + 1;
+            sortingOption = SortingOptions.DSC;
+            if (this._currentSortIndex > 2) {
+                this._currentSortIndex = 0;
+                sortingOption = SortingOptions.NONE;
+            }
+        }
+        this._currentSortField = fieldName;
+
+        var rows = this._isFiltered ? this._dataRowsFiltered : this.dataListOrigin;
+        this.dataList = this.sortData(rows, this._currentSortField, sortingOption);
+        //this.getPageData();
+    }
+
+
+    sortData(dataList:Array<IGridRow>, sortField:string, sortOrder:SortingOptions):Array<IGridRow> {
+
+        if (!sortField || sortOrder === SortingOptions.NONE) {
+            return dataList;
+        }
+        var sortedData = _.sortBy(dataList, function (row:IGridRow) {
+            var rowData = row.fields;
+            var sortedValue = null;
+            for (var i = 0; i < rowData.length; i++) {
+                if (rowData[i].fieldName === sortField) {
+                    sortedValue = rowData[i].value;
+                    return sortedValue;
+                }
+            }
+        });
+        return sortOrder === SortingOptions.ASC ? sortedData : sortedData.reverse();
+    }   // end of sortData
+
+    /* -- paging -- */
+
+    getPageData():Array<IGridRow> {
+        var self = this;
+        if (!this._enablePaging) {
+            return this.dataListOrigin.slice(0);
+        }
+        var pagedDataList = this.getDataListByPage(1,20);
+
+        if (pagedDataList) {
+            for(let row of pagedDataList){
+                if (row.rowSelected) {
+                    if (row !== self._selectedRow) {
+                        row.rowSelected = false;
+                    }
+                }
+            }
+        }
+        return pagedDataList;
+    }
+
+    getDataListByPage( page:number, pageSize:number):Array<IGridRow> {
+        // page starts with 1
+        if (!this.dataListOrigin || page <= 0) {
+            return null;
+        }
+        try {
+            //dataList = sortData(dataList);
+
+            var start = (page - 1) * pageSize;
+            var pagedData = _.slice(this.dataListOrigin, start, start + pageSize);
+            if (!pagedData) {
+                return null;
+            }
+            return pagedData;
+        } catch (e) {
+            console.log(e.message);
+            return null;
+        }
+    }
 }
