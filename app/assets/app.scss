@@ -1,5 +1,6 @@
 @import "common";
 @import "sideMenu";
+@import "rainGrid";
 
 $color-primary-text:#212121;
 
@@ -20,6 +21,14 @@ body{
 
 .main-content{
   @include flex-grow(1);
+  .view-content{
+    overflow-y: auto;
+    max-height: 93vh;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
 }
 
 .header-container{

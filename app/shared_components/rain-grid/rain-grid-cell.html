@@ -1,0 +1,45 @@
+<div mdl>
+    <!--<div *ngIf="isCheckbox" rain-checkbox="value" readonly="true" style="padding-right: 10px;"></div>-->
+
+    <span *ngIf="grid_field.isLink">
+        <a (click)="onClick()">{{grid_field.value}}</a>
+    </span>
+
+    <div style="display: inline-block;" *ngIf="grid_field.isButton">
+        <a class="btn btn-primary btn-xs" (click)="onClick()">{{grid_field.value}}</a>
+    </div>
+
+    <div style="display: inline-block;" *ngIf="grid_field.isIcon">
+        <a class="btn btn-xs" style="font-size: 14px;" (click)="onClick()">
+            <span class="{{grid_field.value}}"></span>
+        </a>
+    </div>
+
+    <div class="flex" *ngIf="grid_field.isCurrency">
+        <div class="flex_item_right">
+            {{grid_field.value|currency}}
+        </div>
+    </div>
+
+    <div class="flex" *ngIf="grid_field.isDate">
+        <div class="flex_item_right">
+            {{grid_field.value|date: 'yyyy-MM-dd'}}
+        </div>
+    </div>
+
+    <div class="flex" *ngIf="grid_field.isNumber">
+        <div class="flex_item_right">
+            <span *ngIf="grid_field.decimal==1">{{grid_field.value|number:1}}</span>
+            <span *ngIf="grid_field.decimal==2">{{grid_field.value|number:2}}</span>
+            <span *ngIf="grid_field.decimal==3">{{grid_field.value|number:3}}</span>
+            <span *ngIf="grid_field.decimal==4">{{grid_field.value|number:4}}</span>
+            <span *ngIf="!grid_field.decimal || grid_field.decimal > 4">{{grid_field.value}}</span>
+        </div>
+    </div>
+
+    <span *ngIf="!grid_field.isCheckbox && !grid_field.isLink && !grid_field.isButton && !grid_field.isCurrency
+        && !grid_field.isNumber && !grid_field.isDate && !grid_field.isHidden && !grid_field.isIcon">
+        {{grid_field.value}}
+    </span>
+
+</div>

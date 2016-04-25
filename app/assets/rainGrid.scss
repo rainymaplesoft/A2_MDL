@@ -1,0 +1,68 @@
+$color-primary-text:#212121;
+
+.rain-grid-table {
+  width: 100%;
+  border: 1px solid #ddd;
+  max-width: 100%;
+  margin-bottom: 20px;
+  background-color: transparent;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  tr {
+    height: 36px;
+    &:nth-of-type(odd) {
+      background-color: #f9f9f9;
+    }
+    &.row-selected td {
+      background-color: #B9F0E3;
+    }
+    td,th{
+      border: 1px solid #ddd;
+    }
+    td {
+      color:$color-primary-text;
+      padding: 4px;
+      vertical-align: middle;
+      div {
+        vertical-align: middle;
+      }
+      &.cell-center {
+        text-align: center;
+        width: 100%;
+      }
+    }
+    th {
+      cursor: pointer;
+      height: 36px;
+      color: white;
+      background-color:#2E3F4F;
+      &:hover {
+        background-color: #064170;;
+      }
+      &.asc {
+        background: linear-gradient(#9DA5AD, #2E3F4F);
+      }
+      &.dsc {
+        background: linear-gradient(#2E3F4F, #9DA5AD);
+      }
+    }
+  }
+
+  > tbody > tr:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+/* rainGrid pagination*/
+.rain-grid-pagination {
+  ul.pagination {
+    margin: 0;
+    .page-arrow {
+      margin-left: 4px;
+      margin-right: 4px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+}

@@ -4,4 +4,6 @@ export class Constants{
     public static PATH_STUDENTS = 'students';
     public static ROUTE_STUDENTS = 'Route_Students';
 
+    /* -- URL --- */
+    public static URL_STUDENTS = 'app/data-access/students.json';
 }
