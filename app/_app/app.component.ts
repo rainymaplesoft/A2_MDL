@@ -8,12 +8,13 @@ import {SideMenu} from "../shared_components/sideMenu/sideMenu";
 import {LayoutService} from "../services/layoutService";
 import {BackDrop} from "../shared_components/back-drop/backDrop";
 import {HttpService} from "../data-access/httpService";
+import {RainGridService} from "../shared_components/rain-grid/rainGridService";
 
 @Component({
     selector: 'app',
     templateUrl: 'app/_app/app.html',
     directives: [ROUTER_DIRECTIVES, SideMenu, BackDrop],
-    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, LayoutService,HttpService]
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, LayoutService,HttpService,RainGridService]
 })
 @RouteConfig([
     {
