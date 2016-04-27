@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {HTTP_PROVIDERS} from "angular2/http";
 import 'rxjs/Rx';
-import {RouteConfig, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from "angular2/router";
+import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 import {StudentList} from "../views/studentList/studentList";
 import {Constants} from "./constants";
 import {SideMenu} from "../shared_components/sideMenu/sideMenu";
@@ -14,7 +14,12 @@ import {RainGridService} from "../shared_components/rain-grid/rainGridService";
     selector: 'app',
     templateUrl: 'app/_app/app.html',
     directives: [ROUTER_DIRECTIVES, SideMenu, BackDrop],
-    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, LayoutService,HttpService,RainGridService]
+    providers: [
+        HTTP_PROVIDERS,
+        //ROUTER_PROVIDERS, /* added in main.ts already, cannot added twice */
+        LayoutService,
+        HttpService,
+        RainGridService]
 })
 @RouteConfig([
     {

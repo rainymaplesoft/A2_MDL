@@ -3,6 +3,7 @@
 @import "rainGrid";
 
 $color-primary-text:#212121;
+$color-primary:#3F51B5;
 
 /* --- page styles --- */
 body{
@@ -23,7 +24,7 @@ body{
   @include flex-grow(1);
   .view-content{
     overflow-y: auto;
-    max-height: 93vh;
+    height: 93vh;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -55,3 +56,50 @@ body{
     margin: 0 5px;
   }
 }
+
+.form_label{
+  color:$color-primary;
+  font-size:12px;
+}
+
+
+/* --- mdl-drop-down --- */
+.r-drop-down {
+  position: relative;
+  min-width: 120px;
+
+  .label-title {
+    color: $color-primary;
+    font-size: 12px;
+  }
+  button {
+    width:100%;
+    border-radius: 0;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  .button-content {
+    -webkit-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    -webkit-align-items: center; /* Safari 7.0+ */
+    align-items: center;
+    border-bottom: 1px #DCDCDC solid;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    &:hover {
+      border-bottom: 1px $color-primary solid;
+    }
+    i {
+      transform: inherit;
+      position: relative;
+      left: 0;
+    }
+    .text-content {
+      font-size: 12px;
+      flex: 1;
+      -webkit-justify-content: center;
+      justify-content:center;
+    }
+  }
+}/* --- end of mdl-drop-down --- */

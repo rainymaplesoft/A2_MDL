@@ -50,13 +50,13 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-align-items: $value;
   align-items: $value;
 }
+
 @mixin justify-content($value) {
   -webkit-justify-content: $value;
   justify-content: $value;
 }
 
 /* --- end of mixin --- */
-
 
 /* --- flex --- */
 .flex {
@@ -94,25 +94,25 @@ input[type=number]::-webkit-outer-spin-button {
   @include justify-content(center);
 }
 
-.flex_item_right{
+.flex_item_right {
   margin-left: auto;
 }
 
 /* --- end of flex --- */
 
-.btn-transparent{
-  margin:0 5px;
+.btn-transparent {
+  margin: 0 5px;
   cursor: pointer;
 }
 
-.back-drop{
+.back-drop {
   transition: opacity 450ms;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(33,33,33,1.0);
+  background-color: rgba(33, 33, 33, 1.0);
   opacity: 0.48;
   z-index: 4;
 }

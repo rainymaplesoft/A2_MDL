@@ -7,4 +7,4 @@ import {provide} from "angular2/core";
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     provide(LocationStrategy, {useClass: HashLocationStrategy})
-]);
+]).catch(err=>console.error(err));

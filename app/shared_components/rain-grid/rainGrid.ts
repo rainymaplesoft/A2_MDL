@@ -3,12 +3,13 @@ import {LayoutService} from "../../services/layoutService";
 import {MDL} from "../mdl/mdl";
 import {RainGridCell} from "./rainGridCell";
 import {RainGridService, IGridOptions, IGridHeader, IGridRow, PageSize, SortingOptions} from "./rainGridService";
+import {RainGridPagination} from "./rainGridPage";
 
 
 @Component({
     selector: 'rain-grid',
     templateUrl: 'app/shared_components/rain-grid/rain-grid.html',
-    directives: [MDL, RainGridCell]
+    directives: [MDL, RainGridCell,RainGridPagination]
 })
 
 export class RainGrid<T> implements OnInit,OnChanges {
@@ -22,12 +23,12 @@ export class RainGrid<T> implements OnInit,OnChanges {
     dataListOrigin:IGridRow[];
     currentSortField:string = null;
     currentSortOrder:string;
+    pageSize:number;
     private _enablePaging:boolean = true;
     private _selectedRow:IGridRow = null;
     private _currentSortIndex:number = 0;
     private _sortingOptions = [null, 'ASC', 'DSC'];
     private _currentPage:number = 1;
-    private _pageSize:number;
     private _pageSizeOptions:PageSize[];
     private _isFiltered:boolean = false;
     private _dataRowsFiltered = [];
@@ -37,7 +38,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
 
     ngOnInit():any {
         this._pageSizeOptions = this._gridService.getPageSizeOptions();
-        this._pageSize = 20;
+        this.pageSize = 10;
     }
 
     ngOnChanges(changes:{}):any {
@@ -57,6 +58,10 @@ export class RainGrid<T> implements OnInit,OnChanges {
         this.cellClicked.emit(JSON.stringify(this.value));
     }
 
+    onPageSizeChanged(pageSize:number){
+        this.pageSize = pageSize;
+        this.dataList = this.getPageData(this.dataListOrigin);
+    }
 
     /*-- Sorting --*/
 
@@ -90,7 +95,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
         if (!this._enablePaging) {
             return data.slice(0);
         }
-        var pagedDataList = this._gridService.getDataListByPage(data, this._currentPage, this._pageSize);
+        var pagedDataList = this._gridService.getDataListByPage(data, this._currentPage, this.pageSize);
 
         if (pagedDataList) {
             for (let row of pagedDataList) {
