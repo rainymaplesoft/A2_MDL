@@ -43,7 +43,7 @@ export class StudentList implements OnInit {
             columnSettings: this.getColumnSetting(),
             data: students,
             enablePage: true,
-            selectable: false
+            selectable: true
         };
     }
 

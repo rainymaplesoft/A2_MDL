@@ -17,7 +17,8 @@
         </tr>
         </tbody>
     </table>
-    <rain-grid-page *ngIf="dataList" [page_size]="pageSize"
+    <rain-grid-page *ngIf="dataList" [page_size]="pageSize" [recordCount]="recordCount"
+                    (pageChanged)="onPageChanged($event)"
                     (pageSizeChanged)="onPageSizeChanged($event)"></rain-grid-page>
 
 </div>

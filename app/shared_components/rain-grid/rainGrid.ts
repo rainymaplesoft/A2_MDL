@@ -9,7 +9,7 @@ import {RainGridPagination} from "./rainGridPage";
 @Component({
     selector: 'rain-grid',
     templateUrl: 'app/shared_components/rain-grid/rain-grid.html',
-    directives: [MDL, RainGridCell,RainGridPagination]
+    directives: [MDL, RainGridCell, RainGridPagination]
 })
 
 export class RainGrid<T> implements OnInit,OnChanges {
@@ -17,6 +17,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
     @Input() grid_options:IGridOptions<T>;
     @Input() value:any;
     @Output() cellClicked:EventEmitter<string> = new EventEmitter<string>();
+    @Output() onRowSelected:EventEmitter<string> = new EventEmitter<string>();
 
     header:IGridHeader[];
     dataList:IGridRow[];
@@ -24,12 +25,13 @@ export class RainGrid<T> implements OnInit,OnChanges {
     currentSortField:string = null;
     currentSortOrder:string;
     pageSize:number;
+    recordCount:number;
     private _enablePaging:boolean = true;
     private _selectedRow:IGridRow = null;
     private _currentSortIndex:number = 0;
     private _sortingOptions = [null, 'ASC', 'DSC'];
     private _currentPage:number = 1;
-    private _pageSizeOptions:PageSize[];
+    //private _pageSizeOptions:PageSize[];
     private _isFiltered:boolean = false;
     private _dataRowsFiltered = [];
 
@@ -37,7 +39,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
     }
 
     ngOnInit():any {
-        this._pageSizeOptions = this._gridService.getPageSizeOptions();
+        //this._pageSizeOptions = this._gridService.getPageSizeOptions();
         this.pageSize = 10;
     }
 
@@ -47,19 +49,37 @@ export class RainGrid<T> implements OnInit,OnChanges {
         }
         this.header = this._gridService.buildHeader(this.grid_options.columnSettings);
         this.dataListOrigin = this._gridService.buildGridData(this.grid_options);
+        this.recordCount = this.dataListOrigin.length;
         this.dataList = this.getPageData(this.dataListOrigin);
     }
 
     selectRow(row:IGridRow):void {
+        if (!this.grid_options.selectable) {
+            return;
+        }
+        var isSelected = row.rowSelected;
+        for (let _row of this.dataList) {
+            _row.rowSelected = false;
+        }
 
+        row.rowSelected = !isSelected;
+        if (row.rowSelected) {
+            this._selectedRow = row;
+            this.onRowSelected.emit(row.idField);
+        }
     }
 
     onClick():void {
         this.cellClicked.emit(JSON.stringify(this.value));
     }
 
-    onPageSizeChanged(pageSize:number){
+    onPageSizeChanged(pageSize:number) {
         this.pageSize = pageSize;
+        this.dataList = this.getPageData(this.dataListOrigin);
+    }
+
+    onPageChanged(currentPage:number) {
+        this._currentPage = currentPage + 1;
         this.dataList = this.getPageData(this.dataListOrigin);
     }
 

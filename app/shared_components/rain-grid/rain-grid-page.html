@@ -5,23 +5,42 @@
     </div>
     <div class="mdl-cell mdl-cell--4-col flex_row_all_center">
         <div class="arrow_button">
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+            (click)="changePage(0)" *ngIf="!disableStart">
+                <i class="material-icons">first_page</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    *ngIf="disableStart" disabled>
                 <i class="material-icons">first_page</i>
             </button>
         </div>
         <div class="arrow_button">
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    (click)="changePage(1)" *ngIf="!disablePrevious">
+                <i class="material-icons">chevron_left</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    *ngIf="disablePrevious" disabled>
                 <i class="material-icons">chevron_left</i>
             </button>
         </div>
         <div class="arrow_button">
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    (click)="changePage(2)" *ngIf="!disableNext">
+                <i class="material-icons">chevron_right</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    *ngIf="disableNext" disabled>
                 <i class="material-icons">chevron_right</i>
             </button>
         </div>
         <div class="arrow_button">
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
-                    disabled>
+                    (click)="changePage(3)" *ngIf="!disableEnd">
+                <i class="material-icons">last_page</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    *ngIf="disableEnd" disabled>
                 <i class="material-icons">last_page</i>
             </button>
         </div>
