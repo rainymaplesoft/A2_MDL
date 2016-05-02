@@ -9,6 +9,7 @@ import {LayoutService} from "../services/layoutService";
 import {BackDrop} from "../shared_components/back-drop/backDrop";
 import {HttpService} from "../data-access/httpService";
 import {RainGridService} from "../shared_components/rain-grid/rainGridService";
+import {LocalDataService} from "../data-access/localDataService";
 
 @Component({
     selector: 'app',
@@ -19,7 +20,9 @@ import {RainGridService} from "../shared_components/rain-grid/rainGridService";
         //ROUTER_PROVIDERS, /* added in main.ts already, cannot added twice */
         LayoutService,
         HttpService,
-        RainGridService]
+        RainGridService,
+        LocalDataService
+    ]
 })
 @RouteConfig([
     {

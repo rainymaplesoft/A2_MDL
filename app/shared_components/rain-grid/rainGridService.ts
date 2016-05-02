@@ -1,5 +1,6 @@
 import {Injectable} from "angular2/core";
 import {IGridField} from "./rainGridCell";
+import {LocalDataService} from "../../data-access/localDataService";
 
 
 export interface IGridOptions<T> {
@@ -33,6 +34,12 @@ export class PageSize {
 @Injectable()
 
 export class RainGridService<T> {
+
+    private _sortedData:IGridRow[];
+
+    constructor(private local:LocalDataService) {
+
+    }
 
     getPageSizeOptions():PageSize[] {
         return [
@@ -138,22 +145,28 @@ export class RainGridService<T> {
         }
     }
 
-    sortData(dataList:Array<IGridRow>, sortField:string, sortOrder:SortingOptions):Array<IGridRow> {
+    sortData(dataList:Array<IGridRow>, sortField:string, sortOrder:SortingOptions, gridDataId:string):Array<IGridRow> {
 
         if (!sortField || sortOrder === SortingOptions.NONE) {
             return dataList;
         }
-        var sortedData = _.sortBy(dataList, function (row:IGridRow) {
-            var rowData = row.fields;
-            var sortedValue = null;
-            for (var i = 0; i < rowData.length; i++) {
-                if (rowData[i].fieldName === sortField) {
-                    sortedValue = rowData[i].value;
-                    return sortedValue;
+
+        this._sortedData = this.local.GetJson(gridDataId);
+
+        if (!this._sortedData) {
+            this._sortedData = _.sortBy(dataList, function (row:IGridRow) {
+                var rowData = row.fields;
+                var sortedValue = null;
+                for (var i = 0; i < rowData.length; i++) {
+                    if (rowData[i].fieldName === sortField) {
+                        sortedValue = rowData[i].value;
+                        return sortedValue;
+                    }
                 }
-            }
-        });
-        return sortOrder === SortingOptions.ASC ? sortedData : sortedData.reverse();
+            });
+            this.local.SetJson(gridDataId, this._sortedData);
+        }
+        return (sortOrder === SortingOptions.ASC) ? this._sortedData : this._sortedData.reverse();
     }   // end of sortData
 }
 

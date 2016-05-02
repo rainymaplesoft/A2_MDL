@@ -4,6 +4,7 @@ import {MDL} from "../mdl/mdl";
 import {RainGridCell} from "./rainGridCell";
 import {RainGridService, IGridOptions, IGridHeader, IGridRow, PageSize, SortingOptions} from "./rainGridService";
 import {RainGridPagination} from "./rainGridPage";
+import {LocalDataService} from "../../data-access/localDataService";
 
 
 @Component({
@@ -23,19 +24,17 @@ export class RainGrid<T> implements OnInit,OnChanges {
     dataList:IGridRow[];
     dataListOrigin:IGridRow[];
     currentSortField:string = null;
-    currentSortOrder:string;
+    currentSortOrder:SortingOptions = SortingOptions.NONE;
     pageSize:number;
     recordCount:number;
+    currentPage:number = 1;
     private _enablePaging:boolean = true;
     private _selectedRow:IGridRow = null;
-    private _currentSortIndex:number = 0;
-    private _sortingOptions = [null, 'ASC', 'DSC'];
-    private _currentPage:number = 1;
-    //private _pageSizeOptions:PageSize[];
+    private _gridDataId:string = '';
     private _isFiltered:boolean = false;
     private _dataRowsFiltered = [];
 
-    constructor(private _gridService:RainGridService<T>, private _layoutService:LayoutService) {
+    constructor(private _gridService:RainGridService<T>, private local:LocalDataService) {
     }
 
     ngOnInit():any {
@@ -47,6 +46,9 @@ export class RainGrid<T> implements OnInit,OnChanges {
         if (!this.grid_options || !this.grid_options.columnSettings) {
             return;
         }
+        this._gridDataId = this.grid_options.idField + this.grid_options.columnSettings.length.toString();
+        this.local.RemoveItem(this._gridDataId);
+
         this.header = this._gridService.buildHeader(this.grid_options.columnSettings);
         this.dataListOrigin = this._gridService.buildGridData(this.grid_options);
         this.recordCount = this.dataListOrigin.length;
@@ -79,32 +81,31 @@ export class RainGrid<T> implements OnInit,OnChanges {
     }
 
     onPageChanged(currentPage:number) {
-        this._currentPage = currentPage + 1;
+        this.currentPage = currentPage;
         this.dataList = this.getPageData(this.dataListOrigin);
     }
 
     /*-- Sorting --*/
 
     sortingChanged(fieldName:string):void {
-        console.log(fieldName);
-        var sortingOption = SortingOptions.NONE;
         if (this.currentSortField !== fieldName) {
-            this._currentSortIndex = 1;
-            sortingOption = SortingOptions.ASC;
+            this.currentSortOrder = SortingOptions.ASC;
         } else {
-            this._currentSortIndex = this._currentSortIndex + 1;
-            sortingOption = SortingOptions.DSC;
-            if (this._currentSortIndex > 2) {
-                this._currentSortIndex = 0;
-                sortingOption = SortingOptions.NONE;
+            if (this.currentSortOrder === SortingOptions.ASC) {
+                this.currentSortOrder = SortingOptions.DSC;
+            } else {
+                if (this.currentSortOrder === SortingOptions.DSC) {
+                    this.currentSortOrder = SortingOptions.NONE;
+                } else {
+                    this.currentSortOrder = SortingOptions.ASC;
+                }
             }
         }
-        this.currentSortOrder = this._sortingOptions[this._currentSortIndex];
-        this.currentSortField = !!this.currentSortOrder ? fieldName : null;
+        this.currentSortField = (this.currentSortOrder !== SortingOptions.NONE) ? fieldName : null;
+        this.currentPage = 1;
 
-        var rows = this._isFiltered ? this._dataRowsFiltered : this.dataListOrigin;
-        let sortedDataList = this._gridService.sortData(rows, this.currentSortField, sortingOption);
-        this.dataList = this.getPageData(sortedDataList);
+        // get page data
+        this.dataList = this.getPageData(this.dataListOrigin);
     }
 
 
@@ -112,17 +113,22 @@ export class RainGrid<T> implements OnInit,OnChanges {
 
     getPageData(data:IGridRow[]):Array<IGridRow> {
         var self = this;
+
+        // apply sorting
+        let sortedDataList = this._gridService.sortData(
+            data, this.currentSortField, this.currentSortOrder, this._gridDataId);
+
         if (!this._enablePaging) {
-            return data.slice(0);
+            return sortedDataList;
         }
-        var pagedDataList = this._gridService.getDataListByPage(data, this._currentPage, this.pageSize);
+
+        // apply paging
+        var pagedDataList = this._gridService.getDataListByPage(sortedDataList, this.currentPage, this.pageSize);
 
         if (pagedDataList) {
             for (let row of pagedDataList) {
-                if (row.rowSelected) {
-                    if (row !== self._selectedRow) {
-                        row.rowSelected = false;
-                    }
+                if (row.rowSelected && row !== self._selectedRow) {
+                    row.rowSelected = false;
                 }
             }
         }

@@ -12,13 +12,14 @@ export enum SelectPage {First, Previous, Next, End}
 export class RainGridPagination implements OnInit,OnChanges {
     @Input() page_size:number;
     @Input() recordCount:number;
+    @Input() currentPage:number;
     @Output() pageSizeChanged:EventEmitter<number> = new EventEmitter<number>();
     @Output() pageChanged:EventEmitter<number> = new EventEmitter<number>();
 
     pageOptions:IKeyValuePair[];
     selected_option:IKeyValuePair;
     private _pageSize:number;
-    private _currentPage:number = 0;
+    private _currentPage:number = 1;
     private _totalPages:number;
     disableStart:boolean;
     disablePrevious:boolean;
@@ -55,7 +56,8 @@ export class RainGridPagination implements OnInit,OnChanges {
     }
 
     ngOnChanges(changes:{}):any {
-        return undefined;
+        this._currentPage = this.currentPage;
+        this.setPageButton();
     }
 
     changeSize(pageSizeOption:IKeyValuePair) {
@@ -65,25 +67,25 @@ export class RainGridPagination implements OnInit,OnChanges {
 
     changePage(selected:SelectPage) {
         this._totalPages = Math.ceil(this.recordCount / this._pageSize);
-        let currentPage = 0;
+        let currentPage = 1;
         switch (selected) {
             case SelectPage.First:
-                currentPage = 0;
+                currentPage = 1;
                 break;
             case SelectPage.Previous:
                 currentPage = this._currentPage - 1;
                 if (currentPage <= 0) {
-                    currentPage = 0;
+                    currentPage = 1;
                 }
                 break;
             case SelectPage.Next:
-                currentPage = this._currentPage + 1;
+                currentPage = this._currentPage+1;
                 if (currentPage >= this._totalPages) {
                     currentPage = this._currentPage;
                 }
                 break;
             case SelectPage.End:
-                currentPage = this._totalPages - 1;
+                currentPage = this._totalPages ;
                 break;
         }
         if (currentPage === this._currentPage) {
@@ -96,14 +98,13 @@ export class RainGridPagination implements OnInit,OnChanges {
 
     private setPageButton():void {
         this._totalPages = Math.ceil(this.recordCount / this._pageSize);
-        let pageNumber = this._currentPage + 1;
         if (1 === this._totalPages) {
             this.disableStart = this.disablePrevious = this.disableNext = this.disableEnd = true;
             return;
         }
-        this.disableStart = this.disablePrevious = (pageNumber === 1);
+        this.disableStart = this.disablePrevious = (this._currentPage === 1);
 
-        this.disableNext = this.disableEnd = (pageNumber === this._totalPages);
+        this.disableNext = this.disableEnd = (this._currentPage === this._totalPages);
 
     }
 }
