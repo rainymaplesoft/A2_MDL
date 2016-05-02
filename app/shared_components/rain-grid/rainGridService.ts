@@ -145,27 +145,23 @@ export class RainGridService<T> {
         }
     }
 
-    sortData(dataList:Array<IGridRow>, sortField:string, sortOrder:SortingOptions, gridDataId:string):Array<IGridRow> {
+    sortData(dataList:Array<IGridRow>, sortField:string, sortOrder:SortingOptions):Array<IGridRow> {
 
         if (!sortField || sortOrder === SortingOptions.NONE) {
             return dataList;
         }
 
-        this._sortedData = this.local.GetJson(gridDataId);
-
-        if (!this._sortedData) {
-            this._sortedData = _.sortBy(dataList, function (row:IGridRow) {
-                var rowData = row.fields;
-                var sortedValue = null;
-                for (var i = 0; i < rowData.length; i++) {
-                    if (rowData[i].fieldName === sortField) {
-                        sortedValue = rowData[i].value;
-                        return sortedValue;
-                    }
+        this._sortedData = _.sortBy(dataList, function (row:IGridRow) {
+            var rowData = row.fields;
+            var sortedValue = null;
+            for (var i = 0; i < rowData.length; i++) {
+                if (rowData[i].fieldName === sortField) {
+                    sortedValue = rowData[i].value;
+                    return sortedValue;
                 }
-            });
-            this.local.SetJson(gridDataId, this._sortedData);
-        }
+            }
+        });
+
         return (sortOrder === SortingOptions.ASC) ? this._sortedData : this._sortedData.reverse();
     }   // end of sortData
 }

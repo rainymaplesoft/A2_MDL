@@ -80,7 +80,7 @@ export class RainGridPagination implements OnInit,OnChanges {
                 break;
             case SelectPage.Next:
                 currentPage = this._currentPage+1;
-                if (currentPage >= this._totalPages) {
+                if (currentPage > this._totalPages) {
                     currentPage = this._currentPage;
                 }
                 break;

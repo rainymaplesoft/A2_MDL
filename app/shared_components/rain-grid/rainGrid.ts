@@ -1,10 +1,8 @@
 import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
-import {LayoutService} from "../../services/layoutService";
 import {MDL} from "../mdl/mdl";
 import {RainGridCell} from "./rainGridCell";
-import {RainGridService, IGridOptions, IGridHeader, IGridRow, PageSize, SortingOptions} from "./rainGridService";
+import {RainGridService, IGridOptions, IGridHeader, IGridRow, SortingOptions} from "./rainGridService";
 import {RainGridPagination} from "./rainGridPage";
-import {LocalDataService} from "../../data-access/localDataService";
 
 
 @Component({
@@ -22,6 +20,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
 
     header:IGridHeader[];
     dataList:IGridRow[];
+    pagedDataList:IGridRow[];
     dataListOrigin:IGridRow[];
     currentSortField:string = null;
     currentSortOrder:SortingOptions = SortingOptions.NONE;
@@ -30,11 +29,8 @@ export class RainGrid<T> implements OnInit,OnChanges {
     currentPage:number = 1;
     private _enablePaging:boolean = true;
     private _selectedRow:IGridRow = null;
-    private _gridDataId:string = '';
-    private _isFiltered:boolean = false;
-    private _dataRowsFiltered = [];
 
-    constructor(private _gridService:RainGridService<T>, private local:LocalDataService) {
+    constructor(private _gridService:RainGridService<T>) {
     }
 
     ngOnInit():any {
@@ -43,16 +39,16 @@ export class RainGrid<T> implements OnInit,OnChanges {
     }
 
     ngOnChanges(changes:{}):any {
+
         if (!this.grid_options || !this.grid_options.columnSettings) {
             return;
         }
-        this._gridDataId = this.grid_options.idField + this.grid_options.columnSettings.length.toString();
-        this.local.RemoveItem(this._gridDataId);
 
         this.header = this._gridService.buildHeader(this.grid_options.columnSettings);
         this.dataListOrigin = this._gridService.buildGridData(this.grid_options);
         this.recordCount = this.dataListOrigin.length;
-        this.dataList = this.getPageData(this.dataListOrigin);
+        this.dataList = this.dataListOrigin.slice(0);
+        this.getPageData();
     }
 
     selectRow(row:IGridRow):void {
@@ -77,17 +73,17 @@ export class RainGrid<T> implements OnInit,OnChanges {
 
     onPageSizeChanged(pageSize:number) {
         this.pageSize = pageSize;
-        this.dataList = this.getPageData(this.dataListOrigin);
+        this.getPageData();
     }
 
     onPageChanged(currentPage:number) {
         this.currentPage = currentPage;
-        this.dataList = this.getPageData(this.dataListOrigin);
+        this.getPageData();
     }
 
     /*-- Sorting --*/
 
-    sortingChanged(fieldName:string):void {
+    onSortingChanged(fieldName:string):void {
         if (this.currentSortField !== fieldName) {
             this.currentSortOrder = SortingOptions.ASC;
         } else {
@@ -105,34 +101,28 @@ export class RainGrid<T> implements OnInit,OnChanges {
         this.currentPage = 1;
 
         // get page data
-        this.dataList = this.getPageData(this.dataListOrigin);
+        this.dataList = this._gridService.sortData(this.dataListOrigin, this.currentSortField, this.currentSortOrder);
+        this.getPageData();
     }
 
 
     /* -- paging -- */
 
-    getPageData(data:IGridRow[]):Array<IGridRow> {
+    getPageData():Array<IGridRow> {
         var self = this;
 
-        // apply sorting
-        let sortedDataList = this._gridService.sortData(
-            data, this.currentSortField, this.currentSortOrder, this._gridDataId);
-
         if (!this._enablePaging) {
-            return sortedDataList;
+            this.pagedDataList = this.dataList;
+            return;
         }
 
-        // apply paging
-        var pagedDataList = this._gridService.getDataListByPage(sortedDataList, this.currentPage, this.pageSize);
+        this.pagedDataList = this._gridService.getDataListByPage(this.dataList, this.currentPage, this.pageSize);
 
-        if (pagedDataList) {
-            for (let row of pagedDataList) {
-                if (row.rowSelected && row !== self._selectedRow) {
-                    row.rowSelected = false;
-                }
+        for (let row of this.pagedDataList) {
+            if (row.rowSelected && row !== self._selectedRow) {
+                row.rowSelected = false;
             }
         }
-        return pagedDataList;
     }
 
 }

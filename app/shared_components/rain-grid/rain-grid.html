@@ -2,7 +2,7 @@
     <table class="rain-grid-table">
         <tbody>
         <tr>
-            <th *ngFor="#field of header" (click)="sortingChanged(field.fieldName)"
+            <th *ngFor="#field of header" (click)="onSortingChanged(field.fieldName)"
                 [ngClass]="{dsc:field.fieldName===currentSortField&&currentSortOrder===2,
                             asc:field.fieldName===currentSortField&&currentSortOrder===1}"
                 *ngIf="!!field && !field.isHidden">
@@ -11,13 +11,13 @@
                     </span>
             </th>
         </tr>
-        <tr *ngFor="#row of dataList" (click)="selectRow(row)" [ngClass]="{'row-selected':row.rowSelected}">
+        <tr *ngFor="#row of pagedDataList" (click)="selectRow(row)" [ngClass]="{'row-selected':row.rowSelected}">
             <td *ngFor="#field of row.fields">
                 <grid-cell [grid_field]="field"></grid-cell>
         </tr>
         </tbody>
     </table>
-    <rain-grid-page *ngIf="dataList" [page_size]="pageSize" [recordCount]="recordCount"
+    <rain-grid-page *ngIf="pagedDataList" [page_size]="pageSize" [recordCount]="recordCount"
                     [currentPage] = "currentPage"
                     (pageChanged)="onPageChanged($event)"
                     (pageSizeChanged)="onPageSizeChanged($event)"></rain-grid-page>
