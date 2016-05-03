@@ -1,11 +1,12 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {LayoutService} from "../../services/layoutService";
 import {MDL} from "../../shared_components/mdl/mdl";
 import {Header} from "../../shared_components/header/header";
 import {HttpService} from "../../data-access/httpService";
 import {Student, IStudent} from "../../model/student";
 import {Constants} from "../../_app/constants";
-import {IGridOptions, RainGrid} from "../../shared_components/rain-grid/rainGrid";
+import {RainGrid} from "../../shared_components/rain-grid/rainGrid";
+import {IGridOptions} from "../../shared_components/rain-grid/rainGridService";
 
 @Component({
     selector: 'student-list',

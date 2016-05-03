@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
-import {HTTP_PROVIDERS} from "angular2/http";
+import {Component} from '@angular/core';
+import {HTTP_PROVIDERS} from "@angular/http";
 import 'rxjs/Rx';
-import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router-deprecated";
 import {StudentList} from "../views/studentList/studentList";
 import {Constants} from "./constants";
 import {SideMenu} from "../shared_components/sideMenu/sideMenu";
@@ -17,7 +17,7 @@ import {LocalDataService} from "../data-access/localDataService";
     directives: [ROUTER_DIRECTIVES, SideMenu, BackDrop],
     providers: [
         HTTP_PROVIDERS,
-        //ROUTER_PROVIDERS, /* added in main.ts already, cannot added twice */
+        ROUTER_PROVIDERS,
         LayoutService,
         HttpService,
         RainGridService,

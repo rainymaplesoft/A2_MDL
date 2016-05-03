@@ -1,4 +1,4 @@
-import {Component, OnInit,OnChanges, Input, Output,EventEmitter} from 'angular2/core';
+import {Component, OnInit,OnChanges, Input, Output,EventEmitter} from '@angular/core';
 import {LayoutService} from "../../services/layoutService";
 import {MDL} from "../mdl/mdl";
 

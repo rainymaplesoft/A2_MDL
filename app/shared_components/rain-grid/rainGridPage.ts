@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from "angular2/core";
+import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from "@angular/core";
 import {MDL} from "../mdl/mdl";
 import {IKeyValuePair, MdlDropDown} from "../mdl-dropdown/mdlDropdonw";
 

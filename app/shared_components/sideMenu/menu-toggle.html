@@ -5,7 +5,7 @@
     </span>
 </button>
 <ul [ngClass]="{'ng-hide':!isOpen()}" class="menu-toggle-list">
-    <li *ngFor="#page of section.pages">
+    <li *ngFor="let page of section.pages">
         <menu-link [section]="page"></menu-link>
     </li>
 </ul>

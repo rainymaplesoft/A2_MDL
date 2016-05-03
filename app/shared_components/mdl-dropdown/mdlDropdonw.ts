@@ -1,5 +1,5 @@
 
-import {Component, Input, OnInit, OnChanges, Output, EventEmitter, ElementRef} from "angular2/core";
+import {Component, Input, OnInit, OnChanges, Output, EventEmitter, ElementRef} from "@angular/core";
 import {MDL} from "../mdl/mdl";
 
 export interface IKeyValuePair{

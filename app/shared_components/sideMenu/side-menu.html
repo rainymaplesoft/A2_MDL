@@ -10,7 +10,7 @@
 
     <div class="menu-content">
         <ul class="menu-sections">
-            <li *ngFor="#section of menu" class="parent-list-item">
+            <li *ngFor="let section of menu" class="parent-list-item">
                 <h2 class="menu-heading" *ngIf="section.type === 'heading'"
                     id="heading_{{ section.name}}">
                     {{section}}

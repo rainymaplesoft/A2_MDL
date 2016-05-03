@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {IGridField} from "./rainGridCell";
 import {LocalDataService} from "../../data-access/localDataService";
 

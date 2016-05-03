@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import {MDL} from "../mdl/mdl";
 import {RainGridCell} from "./rainGridCell";
 import {RainGridService, IGridOptions, IGridHeader, IGridRow, SortingOptions} from "./rainGridService";

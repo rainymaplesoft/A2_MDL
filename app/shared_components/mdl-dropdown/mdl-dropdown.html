@@ -15,6 +15,6 @@
 
     <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
         data-mdl-for="demo-menu-top-right">
-        <li mdl class="mdl-menu__item" *ngFor="#option of options" (click)="changeOption(option)">{{option.label}}</li>
+        <li mdl class="mdl-menu__item" *ngFor="let option of options" (click)="changeOption(option)">{{option.label}}</li>
     </ul>
 </div>

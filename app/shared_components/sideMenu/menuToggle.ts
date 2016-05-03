@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {LayoutService} from "../../services/layoutService";
 import {IMenuSection} from "./sideMenu";
 import {MDL} from "../mdl/mdl";
