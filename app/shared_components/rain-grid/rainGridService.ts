@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {IGridField} from "./rainGridCell";
-import {LocalDataService} from "../../data-access/localDataService";
+import {LocalDataService} from "../../data-access/local-data.service";
 
 
 export interface IGridOptions<T> {

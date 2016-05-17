@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {LayoutService} from "../../services/layoutService";
+import {LayoutService} from "../../services/layout.service";
 import {MDL} from "../mdl/mdl";
 import {HideGreaterThanSmall} from "../hide-gt-sm/hideGtSm";
 

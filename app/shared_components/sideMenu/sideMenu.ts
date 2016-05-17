@@ -1,5 +1,5 @@
 import {Component, OnInit, OnChanges} from '@angular/core';
-import {LayoutService} from "../../services/layoutService";
+import {LayoutService} from "../../services/layout.service";
 import {MenuLink} from "./menuLink";
 import {MenuToggle} from "./menuToggle";
 

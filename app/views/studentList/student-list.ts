@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {LayoutService} from "../../services/layoutService";
+import {LayoutService} from "../../services/layout.service";
 import {MDL} from "../../shared_components/mdl/mdl";
 import {Header} from "../../shared_components/header/header";
-import {HttpService} from "../../data-access/httpService";
+import {HttpService} from "../../data-access/http.service";
 import {Student, IStudent} from "../../model/student";
 import {Constants} from "../../_app/constants";
 import {RainGrid} from "../../shared_components/rain-grid/rainGrid";

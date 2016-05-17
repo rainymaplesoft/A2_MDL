@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {SideMenu} from "../../shared_components/sideMenu/sideMenu";
-import {StudentList} from "../studentList/studentList";
-import {LayoutService} from "../../services/layoutService";
+import {StudentList} from "../studentList/student-list";
+import {LayoutService} from "../../services/layout.service";
 
 @Component({
     selector: 'layout',
