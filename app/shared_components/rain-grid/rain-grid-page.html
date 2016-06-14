@@ -1,7 +1,10 @@
 <div class="mdl-grid pagination">
     <div class="mdl-cell mdl-cell--4-col flex">
-        <mdl-drop-down [options]="pageOptions" [selected_option]="selected_option"
-                       (optionChanged)="changeSize($event)"></mdl-drop-down>
+        <!--<mdl-drop-down [options]="pageOptions" [selected_option]="selected_option"
+                       (optionChanged)="changeSize($event)"></mdl-drop-down>-->
+        <vaadin-combo-box label="Page size" [items]="pageOptions" [(value)]="selected_option"
+                           (value-changed)="changeSize($event)">
+        </vaadin-combo-box>
     </div>
     <div class="mdl-cell mdl-cell--4-col flex_row_all_center">
         <div class="arrow_button">

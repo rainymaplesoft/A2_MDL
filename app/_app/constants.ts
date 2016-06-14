@@ -7,3 +7,10 @@ export class Constants{
     /* -- URL --- */
     public static URL_STUDENTS = 'app/data-access/students.json';
 }
+export interface IKeyValuePair{
+    label:string,
+    value:any
+}
+export  interface ISelectedItem{
+    detail:any
+}

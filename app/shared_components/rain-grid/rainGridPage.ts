@@ -1,13 +1,15 @@
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from "@angular/core";
 import {MDL} from "../mdl/mdl";
-import {IKeyValuePair, MdlDropDown} from "../mdl-dropdown/mdlDropdonw";
+import {MdlDropDown} from "../mdl-dropdown/mdlDropdonw";
+import {PolymerElement} from '@vaadin/angular2-polymer/src/polymer-element';
+import {IKeyValuePair, ISelectedItem} from "../../_app/constants";
 
 export enum SelectPage {First, Previous, Next, End}
 
 @Component({
     selector: 'rain-grid-page',
     templateUrl: 'app/shared_components/rain-grid/rain-grid-page.html',
-    directives: [MDL, MdlDropDown]
+    directives: [MDL, MdlDropDown, PolymerElement('vaadin-combo-box')]
 })
 export class RainGridPagination implements OnInit,OnChanges {
     @Input() page_size:number;
@@ -28,10 +30,10 @@ export class RainGridPagination implements OnInit,OnChanges {
 
     ngOnInit():any {
         this.pageOptions = [
-            {label: ' 5', value: '5'},
-            {label: '10', value: '10'},
-            {label: '20', value: '20'},
-            {label: '30', value: '30'},
+            {label: 'five', value: 5},
+            {label: '10', value: 10},
+            {label: '20', value: 20},
+            {label: '30', value: 30},
         ];
         if (!this.page_size || this.page_size > 5 && this.page_size <= 10) {
             this._pageSize = 10;
@@ -45,7 +47,7 @@ export class RainGridPagination implements OnInit,OnChanges {
         if (this.page_size >= 30) {
             this._pageSize = 30;
         }
-        let pageSize = "" + this._pageSize;
+        let pageSize = this._pageSize;
         for (let option of this.pageOptions) {
             if (pageSize === option.value) {
                 this.selected_option = option;
@@ -60,8 +62,11 @@ export class RainGridPagination implements OnInit,OnChanges {
         this.setPageButton();
     }
 
-    changeSize(pageSizeOption:IKeyValuePair) {
-        this._pageSize = +pageSizeOption.value;
+    changeSize(pageSize:ISelectedItem) {
+        if(isNaN(pageSize.detail.value)){
+            return;
+        }
+        this._pageSize = pageSize.detail.value;//+pageSizeOption.value;
         this.pageSizeChanged.emit(this._pageSize);
     }
 
@@ -79,13 +84,13 @@ export class RainGridPagination implements OnInit,OnChanges {
                 }
                 break;
             case SelectPage.Next:
-                currentPage = this._currentPage+1;
+                currentPage = this._currentPage + 1;
                 if (currentPage > this._totalPages) {
                     currentPage = this._currentPage;
                 }
                 break;
             case SelectPage.End:
-                currentPage = this._totalPages ;
+                currentPage = this._totalPages;
                 break;
         }
         if (currentPage === this._currentPage) {

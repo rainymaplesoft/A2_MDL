@@ -2,10 +2,7 @@
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter, ElementRef} from "@angular/core";
 import {MDL} from "../mdl/mdl";
 
-export interface IKeyValuePair{
-    label:string,
-    value:string
-}
+
 @Component({
     selector:'mdl-drop-down',
     templateUrl: 'app/shared_components/mdl-dropdown/mdl-dropdown.html',
