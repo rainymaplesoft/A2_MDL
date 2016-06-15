@@ -19,6 +19,6 @@ export class MenuLink implements OnInit {
         return undefined;
     }
     selectItem(){
-        
+        console.log(this.section.name);
     }
 }

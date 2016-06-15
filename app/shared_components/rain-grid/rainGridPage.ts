@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from "@angular/core";
 import {MDL} from "../mdl/mdl";
 import {MdlDropDown} from "../mdl-dropdown/mdlDropdonw";
-import {PolymerElement} from '@vaadin/angular2-polymer/src/polymer-element';
+import {PolymerElement} from '@vaadin/polymer-element';
 import {IKeyValuePair, ISelectedItem} from "../../_app/constants";
 
 export enum SelectPage {First, Previous, Next, End}
@@ -9,7 +9,9 @@ export enum SelectPage {First, Previous, Next, End}
 @Component({
     selector: 'rain-grid-page',
     templateUrl: 'app/shared_components/rain-grid/rain-grid-page.html',
-    directives: [MDL, MdlDropDown, PolymerElement('vaadin-combo-box')]
+    directives: [MDL, MdlDropDown, PolymerElement('vaadin-combo-box')],
+    styles: [
+        'vaadin-combo-box.page_size {max-width: 100px;}']
 })
 export class RainGridPagination implements OnInit,OnChanges {
     @Input() page_size:number;
@@ -20,6 +22,7 @@ export class RainGridPagination implements OnInit,OnChanges {
 
     pageOptions:IKeyValuePair[];
     selected_option:IKeyValuePair;
+    selected_value:number;
     private _pageSize:number;
     private _currentPage:number = 1;
     private _totalPages:number;
@@ -30,7 +33,7 @@ export class RainGridPagination implements OnInit,OnChanges {
 
     ngOnInit():any {
         this.pageOptions = [
-            {label: 'five', value: 5},
+            {label: ' 5', value: 5},
             {label: '10', value: 10},
             {label: '20', value: 20},
             {label: '30', value: 30},
@@ -51,6 +54,7 @@ export class RainGridPagination implements OnInit,OnChanges {
         for (let option of this.pageOptions) {
             if (pageSize === option.value) {
                 this.selected_option = option;
+                this.selected_value = this.selected_option.value;
                 break;
             }
         }
@@ -63,10 +67,7 @@ export class RainGridPagination implements OnInit,OnChanges {
     }
 
     changeSize(pageSize:ISelectedItem) {
-        if(isNaN(pageSize.detail.value)){
-            return;
-        }
-        this._pageSize = pageSize.detail.value;//+pageSizeOption.value;
+        this._pageSize = pageSize.detail.value;
         this.pageSizeChanged.emit(this._pageSize);
     }
 

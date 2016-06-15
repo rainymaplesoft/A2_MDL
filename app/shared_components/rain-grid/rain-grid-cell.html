@@ -1,12 +1,13 @@
-<div mdl>
+<div>
     <!--<div *ngIf="isCheckbox" rain-checkbox="value" readonly="true" style="padding-right: 10px;"></div>-->
 
     <span *ngIf="grid_field.isLink">
-        <a (click)="onClick()">{{grid_field.value}}</a>
+        <a (click)="onClick(grid_field.id)" style="cursor: pointer;">{{grid_field.value}}</a>
     </span>
 
     <div style="display: inline-block;" *ngIf="grid_field.isButton">
-        <a class="btn btn-primary btn-xs" (click)="onClick()">{{grid_field.value}}</a>
+        <!--<a class="btn btn-primary btn-xs" (click)="onClick()">{{grid_field.buttonText}}</a>-->
+        <paper-button (click)="onClick(grid_field.id)" style="max-height: 20px;">{{grid_field.buttonText}}</paper-button>
     </div>
 
     <div style="display: inline-block;" *ngIf="grid_field.isIcon">
@@ -23,7 +24,7 @@
 
     <div class="flex" *ngIf="grid_field.isDate">
         <div class="flex_item_right">
-            {{grid_field.value|date: 'yyyy-MM-dd'}}
+            {{grid_field.value |date: 'yyyy-MM-dd'}}
         </div>
     </div>
 

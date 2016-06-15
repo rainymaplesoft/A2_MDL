@@ -24,6 +24,24 @@ export interface IGridRow {
     fields:IGridField[], rowSelected:boolean, idField:string, id:string
 }
 
+export interface IGridField {
+    fieldName:string;
+    displayName:string;
+    value?:any;
+    id?:string;
+    isDate?:boolean;
+    isCurrency?:boolean;
+    isNumber?:boolean;
+    isCheckbox?:boolean;
+    isLink?:boolean;
+    isButton?:boolean;
+    isIcon?:boolean;
+    isHidden?:boolean;
+    decimal?:number;
+    linkEvent?:string;
+    buttonText?:string;
+}
+
 export enum SortingOptions {NONE, ASC, DSC}
 
 export class PageSize {
@@ -100,6 +118,7 @@ export class RainGridService<T> {
                         value: (rowData[col.fieldName] === null || rowData[col.fieldName] === undefined)
                             ? '' : rowData[col.fieldName],
                         displayName: col.displayName,
+                        buttonText: col.buttonText,
                         isCheckbox: col.isCheckbox,
                         isCurrency: col.isCurrency,
                         isNumber: col.isNumber,
@@ -110,6 +129,14 @@ export class RainGridService<T> {
                         isDate: col.isDate,
                         isHidden: col.isHidden || false
                     };
+                    if (col.isDate) {
+                        try {
+                            field.value = new Date(field.value);
+                        } catch (e) {
+                            field.value = null;
+                        }
+
+                    }
                     fields.push(field);
                 }
             }

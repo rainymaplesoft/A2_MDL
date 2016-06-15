@@ -44,7 +44,7 @@ export class StudentList implements OnInit {
             columnSettings: this.getColumnSetting(),
             data: students,
             enablePage: true,
-            selectable: true
+            selectable: false
         };
     }
 
@@ -72,6 +72,16 @@ export class StudentList implements OnInit {
             {
                 fieldName: 'schoolName',
                 displayName: 'School Name'
+            },
+            {
+                fieldName: 'birthDate',
+                displayName: 'Birth Date',
+                isDate:true
+            },
+            {
+                displayName: 'button',
+                isButton: true,
+                buttonText: 'Detail'
             }
         ];
     }

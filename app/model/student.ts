@@ -11,4 +11,5 @@ export class Student implements IStudent{
     firstName:string;
     lastName:string;
     schoolName:string;
+    birthDate:any;
 }

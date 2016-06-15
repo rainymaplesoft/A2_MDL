@@ -1,24 +1,31 @@
 $color-primary-text:#212121;
+$color-row-selected-background:#B9F0E3;
+$header-background-color:#2E3F4F;
+$header-background-color-hover:#064170;
+$header-color-gradient-deep:#2E3F4F;
+$header-color-gradient-shallow:#9DA5AD;
+$color-table-border:#ddd;
+$background-color-odd-row:#f9f9f9;
 
 .rain-grid-table {
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid $color-table-border;
   max-width: 100%;
   margin-bottom: 20px;
-  background-color: transparent;
+  background-color: white;
   border-spacing: 0;
   border-collapse: collapse;
 
   tr {
     height: 36px;
     &:nth-of-type(odd) {
-      background-color: #f9f9f9;
+      background-color: $background-color-odd-row;
     }
     &.row-selected td {
-      background-color: #B9F0E3;
+      background-color: $color-row-selected-background;
     }
     td,th{
-      border: 1px solid #ddd;
+      border: 1px solid $color-table-border;
     }
     td {
       color:$color-primary-text;
@@ -36,15 +43,15 @@ $color-primary-text:#212121;
       cursor: pointer;
       height: 36px;
       color: white;
-      background-color:#2E3F4F;
+      background-color:$header-background-color;
       &:hover {
-        background-color: #064170;;
+        background-color: $header-background-color-hover;
       }
       &.asc {
-        background: linear-gradient(#9DA5AD, #2E3F4F);
+        background: linear-gradient($header-color-gradient-shallow, $header-color-gradient-deep);
       }
       &.dsc {
-        background: linear-gradient(#2E3F4F, #9DA5AD);
+        background: linear-gradient($header-color-gradient-deep, $header-color-gradient-shallow);
       }
     }
   }
