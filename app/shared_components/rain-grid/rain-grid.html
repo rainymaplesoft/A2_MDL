@@ -13,7 +13,7 @@
         </tr>
         <tr *ngFor="let row of pagedDataList" (click)="selectRow(row)" [ngClass]="{'row-selected':row.rowSelected}">
             <td *ngFor="let field of row.fields">
-                <grid-cell [grid_field]="field"></grid-cell>
+                <grid-cell [grid_field]="field" (cellClicked)="cellClicked($event)" ></grid-cell>
         </tr>
         </tbody>
     </table>

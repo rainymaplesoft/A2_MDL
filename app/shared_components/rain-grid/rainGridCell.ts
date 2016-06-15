@@ -14,7 +14,7 @@ export class RainGridCell implements OnInit,OnChanges {
 
     @Input() grid_field:IGridField;
     @Input() value:any;
-    @Output() cellClicked:EventEmitter<string> = new EventEmitter<string>();
+    @Output() cellClicked:EventEmitter<number> = new EventEmitter<number>();
 
     constructor(private _layoutService:LayoutService) {
     }
@@ -28,8 +28,8 @@ export class RainGridCell implements OnInit,OnChanges {
     }
 
     onClick(id:number):void {
-        this.cellClicked.emit(JSON.stringify(this.value));
-        console.log('cell button clicked, id = ' + id);
+        this.cellClicked.emit(id);
+        //console.log('cell button clicked, id = ' + id);
     }
 
 }

@@ -11,7 +11,7 @@
     </div>
 
     <div style="display: inline-block;" *ngIf="grid_field.isIcon">
-        <a class="btn btn-xs" style="font-size: 14px;" (click)="onClick()">
+        <a class="btn btn-xs" style="font-size: 14px;" (click)="onClick(grid_field.id)">
             <span class="{{grid_field.value}}"></span>
         </a>
     </div>

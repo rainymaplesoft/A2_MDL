@@ -15,7 +15,7 @@ export class RainGrid<T> implements OnInit,OnChanges {
 
     @Input() grid_options:IGridOptions<T>;
     @Input() value:any;
-    @Output() cellClicked:EventEmitter<string> = new EventEmitter<string>();
+    @Output() onCellClicked:EventEmitter<number> = new EventEmitter<number>();
     @Output() onRowSelected:EventEmitter<string> = new EventEmitter<string>();
 
     header:IGridHeader[];
@@ -67,8 +67,8 @@ export class RainGrid<T> implements OnInit,OnChanges {
         }
     }
 
-    onClick():void {
-        this.cellClicked.emit(JSON.stringify(this.value));
+    cellClicked(id:number):void {
+        this.onCellClicked.emit(id);
     }
 
     onPageSizeChanged(pageSize:number) {

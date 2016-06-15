@@ -47,7 +47,10 @@ export class StudentList implements OnInit {
             selectable: false
         };
     }
+    rowSelected(id:number){
+        //navigate to detail page by id
 
+    }
     /*
      "studentId": "1",
      "firstName": "first",

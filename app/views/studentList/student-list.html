@@ -1,6 +1,6 @@
 <div mdl>
     <header></header>
     <div class="view-content">
-        <rain-grid [grid_options]="gridOptions"></rain-grid>
+        <rain-grid [grid_options]="gridOptions" (onCellClicked)="rowSelected($event)"></rain-grid>
     </div>
 </div>
