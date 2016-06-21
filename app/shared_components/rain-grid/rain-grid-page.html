@@ -1,5 +1,5 @@
 <div class="mdl-grid pagination">
-    <div class="mdl-cell mdl-cell--4-col flex">
+    <div class="mdl-cell--4-col flex">
         <!--<mdl-drop-down [options]="pageOptions" [selected_option]="selected_option"
                        (optionChanged)="changeSize($event)"></mdl-drop-down>-->
         <vaadin-combo-box label="Page size" [items]="pageOptions" [(value)]="selected_value"
@@ -7,7 +7,7 @@
                           (value-changed)="changeSize($event)">
         </vaadin-combo-box>
     </div>
-    <div class="mdl-cell mdl-cell--4-col flex_row_all_center">
+    <div class="mdl-cell--4-col flex_row_all_center">
         <div class="arrow_button">
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
             (click)="changePage(0)" *ngIf="!disableStart">
@@ -49,7 +49,7 @@
             </button>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--4-col flex">
+    <div class="mdl-cell--4-col flex">
 
     </div>
 </div>

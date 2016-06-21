@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import {LayoutService} from "../../services/layout.service";
 import {MDL} from "../../shared_components/mdl/mdl";
 import {Header} from "../../shared_components/header/header";
 import {HttpService} from "../../data-access/http.service";
-import {Student, IStudent} from "../../model/student";
+import {Student} from "../../model/student";
 import {Constants} from "../../_app/constants";
 import {RainGrid} from "../../shared_components/rain-grid/rainGrid";
 import {IGridOptions} from "../../shared_components/rain-grid/rainGridService";
@@ -18,7 +19,7 @@ export class StudentList implements OnInit {
     students:Student[];
     gridOptions:IGridOptions<Student>;
 
-    constructor(private layoutService:LayoutService, private httpService:HttpService) {
+    constructor(private layoutService:LayoutService, private httpService:HttpService,private router: Router) {
 
     }
 
@@ -49,7 +50,8 @@ export class StudentList implements OnInit {
     }
     rowSelected(id:number){
         //navigate to detail page by id
-
+        this.router.navigate([Constants.ROUTE_STUDENT_DETAIL,{id:id}]);
+console.log(id);
     }
     /*
      "studentId": "1",

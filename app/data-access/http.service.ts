@@ -15,7 +15,7 @@ export class HttpService {
     }
 
     // for local testing data only
-    getById<T>(url:string,id:string,idName:string):Observable<T[]> {
+    getById<T>(url:string,id:string,idName:string):Observable<T> {
         return this._http.get(url).map((response:Response)=>{
             let result = response.json();
             for(let item of result){

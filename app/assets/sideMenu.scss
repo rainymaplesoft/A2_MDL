@@ -143,10 +143,10 @@ $color-primary-text:#212121;
   }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 839px) {
   .side-menu.hide-lt-sm {
     width: 0;
-    transform: translateX(-320px);
+    transform: translateX(-300px);
     position: absolute;
     z-index:5;
   }
@@ -156,9 +156,9 @@ $color-primary-text:#212121;
     z-index:5;
   }
 }
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 840px) {
   .side-menu {
-    width: 320px;
+    width: 300px;
     position: relative;
     z-index:1;
   }

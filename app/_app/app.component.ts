@@ -10,6 +10,7 @@ import {BackDrop} from "../shared_components/back-drop/backDrop";
 import {HttpService} from "../data-access/http.service";
 import {RainGridService} from "../shared_components/rain-grid/rainGridService";
 import {LocalDataService} from "../data-access/local-data.service";
+import {StudentDetail} from "../views/student-detail/student-detail";
 
 @Component({
     selector: 'app',
@@ -30,6 +31,11 @@ import {LocalDataService} from "../data-access/local-data.service";
         name: Constants.ROUTE_STUDENTS,
         component: StudentList,
         useAsDefault: true
+    },
+    {
+        path: Constants.PATH_STUDENT_DETAIL,
+        name: Constants.ROUTE_STUDENT_DETAIL,
+        component: StudentDetail
     }
 ])
 export class AppComponent {

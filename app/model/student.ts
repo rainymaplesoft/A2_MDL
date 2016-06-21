@@ -1,15 +1,9 @@
-
-export interface IStudent {
-    studentId:string;
+export class Student{
+    studentId:number;
+    studentCode:number;
     firstName:string;
     lastName:string;
-    schoolName:string;
-}
-
-export class Student implements IStudent{
-    studentId:string;
-    firstName:string;
-    lastName:string;
+    gender:string;
     schoolName:string;
     birthDate:any;
 }
