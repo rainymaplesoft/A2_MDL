@@ -29,6 +29,7 @@
     "vaadin-grid": "Vaadin/vaadin-grid#^1.1.0",
     "vaadin-date-picker": "Vaadin/vaadin-date-picker#^1.1.0",
     "vaadin-combo-box": "^1.0.1",
-    "Materialize": "materialize#^0.97.6"
+    "paper-tabs": "^1.6.2",
+    "iron-pages": "^1.0.7"
   }
 }

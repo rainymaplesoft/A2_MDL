@@ -1,6 +1,7 @@
 
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter, ElementRef} from "@angular/core";
 import {MDL} from "../mdl/mdl";
+import {IKeyValuePair} from "../../_app/constants";
 
 
 @Component({

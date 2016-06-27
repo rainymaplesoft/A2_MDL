@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import {LayoutService} from "../../services/layout.service";
 import {MDL} from "../mdl/mdl";
 import {HideGreaterThanSmall} from "../hide-gt-sm/hideGtSm";
@@ -10,9 +11,10 @@ import {HideGreaterThanSmall} from "../hide-gt-sm/hideGtSm";
 })
 
 export class Header implements OnInit {
-
-
-    constructor(private _layoutService:LayoutService) {
+    @Input() title:string;
+    @Input() backRoute:string;
+    
+    constructor(private _layoutService:LayoutService,private router: Router) {
     }
 
     ngOnInit():any {
@@ -22,5 +24,10 @@ export class Header implements OnInit {
     openSideMenu():void {
         this._layoutService.openSideMenu();
         this._layoutService.showBackDrop();
+    }
+    routeBack():void{
+        if(this.backRoute){
+            this.router.navigate([this.backRoute]);
+        }
     }
 }

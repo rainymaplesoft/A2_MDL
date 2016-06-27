@@ -1,2 +1,32 @@
-<header></header>
-student:{{studentName}}
+<style is="custom-style">
+    .paper-tabs-0 #selectionBar.paper-tabs{
+        background-color: #FF4081;
+    }
+    paper-tabs{
+        background-color: #3f51b5;
+    }
+    paper-tab[link] a {
+        /* These mixins (from iron-flex-layout) center the link text. */
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+
+<header title="Student Detail" [backRoute]="backRoute"></header>
+
+
+<paper-tabs selected="0">
+    <paper-tab link>
+        <a (click)="navigateTab(1)">Profile</a>
+    </paper-tab>
+    <paper-tab link>
+        <a (click)="navigateTab(2)">Student Group</a>
+    </paper-tab>
+    <paper-tab link>
+        <a (click)="navigateTab(3)">Objectives</a>
+    </paper-tab>
+</paper-tabs>
+
+<router-outlet></router-outlet>
