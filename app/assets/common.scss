@@ -94,8 +94,24 @@ input[type=number]::-webkit-outer-spin-button {
   @include justify-content(center);
 }
 
+.flex_grow_max {
+  flex: 1;
+}
+
 .flex_item_right {
   margin-left: auto;
+}
+
+.flex_item_bottom {
+  margin-top: auto;
+}
+
+.max_height {
+  height: 100%;
+}
+
+.max_width {
+  width: 100%;
 }
 
 /* --- end of flex --- */
@@ -125,8 +141,9 @@ input[type=number]::-webkit-outer-spin-button {
     display: none !important;
   }
 }
+
 @media (min-width: 480px) {
-  .show-on-xs-only{
+  .show-on-xs-only {
     display: none !important;
   }
 }
@@ -142,7 +159,6 @@ input[type=number]::-webkit-outer-spin-button {
     display: block !important;
   }
 }
-
 
 @media (max-width: 839px) {
   .center-on-sm-and-down {

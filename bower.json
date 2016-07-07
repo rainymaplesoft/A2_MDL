@@ -30,6 +30,7 @@
     "vaadin-date-picker": "Vaadin/vaadin-date-picker#^1.1.0",
     "vaadin-combo-box": "^1.0.1",
     "paper-tabs": "^1.6.2",
-    "iron-pages": "^1.0.7"
+    "iron-pages": "^1.0.7",
+    "paper-toggle-button": "^1.1.2"
   }
 }

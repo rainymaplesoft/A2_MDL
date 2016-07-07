@@ -38,6 +38,9 @@ export class StudentDetail implements OnInit {
     private studentName:string;
     private student:Student;
     private backRoute = Constants.ROUTE_STUDENTS;
+    private show_profile: boolean;
+    private show_group: boolean;
+    private show_objectives: boolean;
 
     constructor(private httpService:HttpService,private router:Router,
                 private routeParams:RouteParams) {
@@ -50,10 +53,30 @@ export class StudentDetail implements OnInit {
                 this.student = student;
                 this.studentName = student.firstName + ' ' + student.lastName;
                 console.log(student.firstName);
-                this.navigateTab(1);
+                this.showTab(1);
             })
     }
-    
+
+    showTab(tab: number): void {
+        if (!this.student) {
+            return;
+        }
+        this.show_profile = false;
+        this.show_group = false;
+        this.show_objectives = false;
+        switch (tab) {
+            case 1:
+                this.show_profile = true;
+                break;
+            case 2:
+                this.show_group = true;
+                break;
+            case 3:
+                this.show_objectives = true;
+                break;
+        }
+    }
+
     navigateTab(tab:number):void{
         if(!this.student){
             return;

@@ -1,10 +1,12 @@
 <style is="custom-style">
-    .paper-tabs-0 #selectionBar.paper-tabs{
+    .paper-tabs-0 #selectionBar.paper-tabs {
         background-color: #FF4081;
     }
-    paper-tabs{
+
+    paper-tabs {
         background-color: #3f51b5;
     }
+
     paper-tab[link] a {
         /* These mixins (from iron-flex-layout) center the link text. */
         @apply(--layout-horizontal);
@@ -12,21 +14,81 @@
         color: #fff;
         text-decoration: none;
     }
+
+    .student_details .hide_tab {
+        display: none;
+    }
 </style>
 
-<header title="Student Detail" [backRoute]="backRoute"></header>
 
+<div class="view student_details flex_column">
+    <header title="Student Detail" [backRoute]="backRoute"></header>
+    <div class="view_content">
+        <div class="detail_tabs">
+            <paper-tabs selected="0">
+                <paper-tab link>
+                    <a (click)="showTab(1)">Profile</a>
+                </paper-tab>
+                <paper-tab link>
+                    <a (click)="showTab(2)">Student Group</a>
+                </paper-tab>
+                <paper-tab link>
+                    <a (click)="showTab(3)">Objectives</a>
+                </paper-tab>
+            </paper-tabs>
+        </div>
+        <!--<router-outlet></router-outlet>-->
+        <div class="detail_tab_content flex_column max_height ">
+            <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_profile}">
+                <h2>Profile</h2>
+            </div>
+            <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_group}">
 
-<paper-tabs selected="0">
-    <paper-tab link>
-        <a (click)="navigateTab(1)">Profile</a>
-    </paper-tab>
-    <paper-tab link>
-        <a (click)="navigateTab(2)">Student Group</a>
-    </paper-tab>
-    <paper-tab link>
-        <a (click)="navigateTab(3)">Objectives</a>
-    </paper-tab>
-</paper-tabs>
-
-<router-outlet></router-outlet>
+                <ul class="demo-list-three mdl-list">
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                        <span class="mdl-list__item-primary-content">
+                          <i class="material-icons mdl-list__item-avatar">person</i>
+                          <span>Bryan Cranston</span>
+                          <span class="mdl-list__item-text-body">
+                            Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+                            for playing Hal in Malcom in the Middle.
+                          </span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                          <paper-toggle-button>Toggle</paper-toggle-button>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                        <span class="mdl-list__item-primary-content">
+                          <i class="material-icons  mdl-list__item-avatar">person</i>
+                          <span>Aaron Paul</span>
+                          <span class="mdl-list__item-text-body">
+                            Aaron Paul played the role of Jesse in Breaking Bad. He also featured in
+                            the "Need For Speed" Movie.
+                          </span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                        <span class="mdl-list__item-primary-content">
+                          <i class="material-icons  mdl-list__item-avatar">person</i>
+                          <span>Bob Odenkirk</span>
+                          <span class="mdl-list__item-text-body">
+                            Bob Odinkrik played the role of Saul in Breaking Bad. Due to public fondness for the
+                            character, Bob stars in his own show now, called "Better Call Saul".
+                          </span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_objectives}">
+                <h2>Objectives</h2>
+            </div>
+        </div>
+    </div>
+</div>
