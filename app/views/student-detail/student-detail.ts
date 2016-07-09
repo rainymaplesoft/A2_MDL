@@ -37,6 +37,7 @@ export class StudentDetail implements OnInit {
 
     private studentName:string;
     private student:Student;
+    private studentGroups:StudentGroup[];
     private backRoute = Constants.ROUTE_STUDENTS;
     private show_profile: boolean;
     private show_group: boolean;
@@ -54,7 +55,11 @@ export class StudentDetail implements OnInit {
                 this.studentName = student.firstName + ' ' + student.lastName;
                 console.log(student.firstName);
                 this.showTab(1);
-            })
+            });
+        this.httpService.getList<StudentGroup>(Constants.URL_STUDENT_GROUPS)
+            .subscribe(groups => {
+                this.studentGroups=groups;
+            });
     }
 
     showTab(tab: number): void {
@@ -76,6 +81,7 @@ export class StudentDetail implements OnInit {
                 break;
         }
     }
+/*
 
     navigateTab(tab:number):void{
         if(!this.student){
@@ -95,6 +101,7 @@ export class StudentDetail implements OnInit {
                 this.router.navigate([Constants.ROUTE_STUDENT_PROFILE,{student:this.student}]);
         }
     }
+*/
 
 /*    goBack() {
         window.history.back();

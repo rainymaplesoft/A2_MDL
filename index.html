@@ -31,7 +31,21 @@
     <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
     <link rel="import" href="bower_components/iron-pages/iron-pages.html">
 
+    <style is="custom-style">
+        :root {
+            --my-custom-color: red;
+            --paper-tab-ink: var(--my-custom-color);
 
+            /* custom CSS property */
+            --paper-tabs-selection-bar-color: var(--paper-pink-a200);
+
+            /* custom CSS mixin */
+            --paper-tabs: {
+                color: var(--default-primary-color); /* variable defined in default-theme.html */
+                font-size: 20px;
+            }
+        }
+    </style>
 
 
     <!-- 1. Load libraries -->

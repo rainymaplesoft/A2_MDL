@@ -20,6 +20,7 @@ export class Constants{
 
     /* -- URL --- */
     public static URL_STUDENTS = 'app/data-access/students.json';
+    public static URL_STUDENT_GROUPS = 'app/data-access/groups.json';
 }
 export interface IKeyValuePair{
     label:string,
