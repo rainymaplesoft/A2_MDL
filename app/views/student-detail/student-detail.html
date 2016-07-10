@@ -21,6 +21,11 @@
 
 </style>
 
+<style>
+    .md-list-text div {
+        white-space: normal;
+    }
+</style>
 
 <div class="view student_details flex_column">
     <header title="Student Detail" [backRoute]="backRoute" [menuAction]="{save:true}"></header>
@@ -43,25 +48,19 @@
             <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_profile}">
                 <h2>Profile</h2>
             </div>
-            <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_group}">
-
-                <ul class="demo-list-three mdl-list">
-                    <li class="mdl-list__item mdl-list__item--three-line" *ngFor="let group of studentGroups">
-                        <span class="mdl-list__item-primary-content">
-                          <i class="material-icons mdl-list__item-avatar">local_activity</i>
-                          <span>{{group.name}}</span>
-                          <span class="mdl-list__item-text-body">
-                            {{group.purpose}}
-                          </span>
-                        </span>
-                        <span class="mdl-list__item-secondary-content">
+            <div class="detail_groups flex_grow_max" [ngClass]="{'hide_tab':!show_group}">
+                <md-list>
+                    <md-list-item *ngFor="let group of studentGroups">
+                        <img md-list-avatar src="..." alt="...">
+                        <div md-line> {{group.name}}</div>
+                        <div md-line>{{group.purpose}}</div>
+                        <div class="flex_item_right">
                             <md-slide-toggle [(ngModel)]="group.selected"></md-slide-toggle>
-                          <!--<paper-toggle-button checked="!group.selected">Toggle</paper-toggle-button>-->
-                        </span>
-                    </li>
-                </ul>
+                        </div>
+                    </md-list-item>
+                </md-list>
             </div>
-            <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_objectives}">
+            <div class="detail_objectives flex_grow_max" [ngClass]="{'hide_tab':!show_objectives}">
                 <h2>Objectives</h2>
             </div>
         </div>

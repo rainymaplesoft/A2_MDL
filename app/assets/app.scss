@@ -22,6 +22,7 @@ body{
 
 .main-content{
   @include flex-grow(1);
+  max-width:100%;
   .view {
     height: 100%;
     @extend .flex_column;

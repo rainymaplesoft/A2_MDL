@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteConfig, RouteParams,Router,ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {MD_SLIDE_TOGGLE_DIRECTIVES } from '@angular2-material/slide-toggle';
+import {MD_LIST_DIRECTIVES } from '@angular2-material/list';
 import {LayoutService} from "../../services/layout.service";
 import {Header} from "../../shared_components/header/header";
 import {HttpService} from "../../data-access/http.service";
@@ -13,7 +14,7 @@ import {StudentObjectives} from "./student-objectives";
 @Component({
     selector: 'student-detail',
     templateUrl: 'app/views/student-detail/student-detail.html',
-    directives: [MD_SLIDE_TOGGLE_DIRECTIVES,Header,ROUTER_DIRECTIVES]
+    directives: [MD_SLIDE_TOGGLE_DIRECTIVES,MD_LIST_DIRECTIVES,Header,ROUTER_DIRECTIVES]
 })
 
 @RouteConfig([
