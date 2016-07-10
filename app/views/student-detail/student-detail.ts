@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteConfig, RouteParams,Router,ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {MD_SLIDE_TOGGLE_DIRECTIVES } from '@angular2-material/slide-toggle';
 import {LayoutService} from "../../services/layout.service";
 import {Header} from "../../shared_components/header/header";
 import {HttpService} from "../../data-access/http.service";
@@ -12,7 +13,7 @@ import {StudentObjectives} from "./student-objectives";
 @Component({
     selector: 'student-detail',
     templateUrl: 'app/views/student-detail/student-detail.html',
-    directives: [Header,ROUTER_DIRECTIVES]
+    directives: [MD_SLIDE_TOGGLE_DIRECTIVES,Header,ROUTER_DIRECTIVES]
 })
 
 @RouteConfig([
@@ -43,8 +44,9 @@ export class StudentDetail implements OnInit {
     private show_group: boolean;
     private show_objectives: boolean;
 
-    constructor(private httpService:HttpService,private router:Router,
+    constructor(private httpService:HttpService,private router:Router,private _layoutService:LayoutService,
                 private routeParams:RouteParams) {
+        this._layoutService.save = this.save.bind(this);
     }
 
     ngOnInit() {
@@ -80,6 +82,11 @@ export class StudentDetail implements OnInit {
                 this.show_objectives = true;
                 break;
         }
+    }
+
+    save():any{
+        let bb = this.studentGroups;
+        let aa = this.student;
     }
 /*
 

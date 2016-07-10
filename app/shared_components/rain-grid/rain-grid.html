@@ -4,8 +4,9 @@
         <tr>
             <th *ngFor="let field of header" (click)="onSortingChanged(field.fieldName)"
                 [ngClass]="{dsc:field.fieldName===currentSortField&&currentSortOrder===2,
-                            asc:field.fieldName===currentSortField&&currentSortOrder===1}"
-                *ngIf="!!field && !field.isHidden">
+                        asc:field.fieldName===currentSortField&&currentSortOrder===1}">
+                <!--*ngIf="!!field && !field.isHidden"-->
+
                     <span>
                         {{field.displayName}}
                     </span>
@@ -13,12 +14,12 @@
         </tr>
         <tr *ngFor="let row of pagedDataList" (click)="selectRow(row)" [ngClass]="{'row-selected':row.rowSelected}">
             <td *ngFor="let field of row.fields">
-                <grid-cell [grid_field]="field" (cellClicked)="cellClicked($event)" ></grid-cell>
+                <grid-cell [grid_field]="field" (cellClicked)="cellClicked($event)"></grid-cell>
         </tr>
         </tbody>
     </table>
     <rain-grid-page *ngIf="pagedDataList" [page_size]="pageSize" [recordCount]="recordCount"
-                    [currentPage] = "currentPage"
+                    [currentPage]="currentPage"
                     (pageChanged)="onPageChanged($event)"
                     (pageSizeChanged)="onPageSizeChanged($event)"></rain-grid-page>
 

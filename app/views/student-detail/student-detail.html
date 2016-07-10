@@ -23,21 +23,21 @@
 
 
 <div class="view student_details flex_column">
-    <header title="Student Detail" [backRoute]="backRoute"></header>
+    <header title="Student Detail" [backRoute]="backRoute" [menuAction]="{save:true}"></header>
+    <div class="detail_tabs">
+        <paper-tabs selected="0">
+            <paper-tab link>
+                <a (click)="showTab(1)">Profile</a>
+            </paper-tab>
+            <paper-tab link>
+                <a (click)="showTab(2)">Student Group</a>
+            </paper-tab>
+            <paper-tab link>
+                <a (click)="showTab(3)">Objectives</a>
+            </paper-tab>
+        </paper-tabs>
+    </div>
     <div class="view_content">
-        <div class="detail_tabs">
-            <paper-tabs selected="0">
-                <paper-tab link>
-                    <a (click)="showTab(1)">Profile</a>
-                </paper-tab>
-                <paper-tab link>
-                    <a (click)="showTab(2)">Student Group</a>
-                </paper-tab>
-                <paper-tab link>
-                    <a (click)="showTab(3)">Objectives</a>
-                </paper-tab>
-            </paper-tabs>
-        </div>
         <!--<router-outlet></router-outlet>-->
         <div class="detail_tab_content flex_column max_height ">
             <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_profile}">
@@ -48,14 +48,15 @@
                 <ul class="demo-list-three mdl-list">
                     <li class="mdl-list__item mdl-list__item--three-line" *ngFor="let group of studentGroups">
                         <span class="mdl-list__item-primary-content">
-                          <i class="material-icons mdl-list__item-avatar">person</i>
+                          <i class="material-icons mdl-list__item-avatar">local_activity</i>
                           <span>{{group.name}}</span>
                           <span class="mdl-list__item-text-body">
                             {{group.purpose}}
                           </span>
                         </span>
                         <span class="mdl-list__item-secondary-content">
-                          <paper-toggle-button ngmodel="group.selected">Toggle</paper-toggle-button>
+                            <md-slide-toggle [(ngModel)]="group.selected"></md-slide-toggle>
+                          <!--<paper-toggle-button checked="!group.selected">Toggle</paper-toggle-button>-->
                         </span>
                     </li>
                 </ul>

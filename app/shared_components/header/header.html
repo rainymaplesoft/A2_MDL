@@ -1,28 +1,18 @@
-<div class="header-container" mdl>
+<div class="header-container">
     <div class="hide-on-sm-and-up" *ngIf="!backRoute">
-            <span class="btn-transparent" (click)="openSideMenu()">
-                <i class="material-icons">menu</i>
-            </span>
+        <paper-icon-button icon="menu" title="menu"  (click)="openSideMenu()"></paper-icon-button>
     </div>
 
     <div *ngIf="!!backRoute">
-            <span class="btn-transparent" (click)="routeBack()">
-                <i class="material-icons">keyboard_arrow_left</i>
-            </span>
+        <paper-icon-button icon="arrow-back" title="back"  (click)="routeBack()"></paper-icon-button>
     </div>
 
     <div class="header-title">{{title}}</div>
-    <div style="margin-left: auto;" class="toolbar-right-section">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                  mdl-textfield--floating-label mdl-textfield--align-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon"
-                   for="fixed-header-drawer-exp">
-                <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-                <input class="mdl-textfield__input" type="text" name="sample"
-                       id="fixed-header-drawer-exp">
-            </div>
+    <div class="toolbar-right-section flex_item_right flex_row_shrink_center">
+        <div class="toolbar_button_section">
+            <paper-icon-button icon="search" title="search" *ngIf="menuAction.search"></paper-icon-button>
+            <paper-icon-button icon="check" title="save" *ngIf="menuAction.save" (click)="actionSave()"></paper-icon-button>
+            <paper-icon-button icon="add" title="add" *ngIf="menuAction.add"></paper-icon-button>
         </div>
     </div>
 </div>

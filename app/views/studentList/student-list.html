@@ -1,5 +1,5 @@
-<div mdl class="view">
-    <header title="Student List"></header>
+<div class="view">
+    <header title="Student List" [menuAction]="{search:true}"></header>
     <div class="view_content">
         <rain-grid [grid_options]="gridOptions" (onCellClicked)="rowSelected($event)"></rain-grid>
     </div>

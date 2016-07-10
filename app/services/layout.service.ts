@@ -34,4 +34,18 @@ export class LayoutService {
         this.openedMenuSection = this.openedMenuSection === section ? null : section;
     }
     
+    /** Actions **/
+    save():any{
+        
+    }
+    search():any{
+        
+    }
+    
+}
+export class MenuAction{
+    search:boolean;
+    add:boolean;
+    save:boolean;
+    more:boolean;
 }
