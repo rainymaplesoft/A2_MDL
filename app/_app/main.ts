@@ -1,6 +1,6 @@
 import {bootstrap}    from '@angular/platform-browser-dynamic';
-import {AppComponent} from './app.component';
 import {disableDeprecatedForms, provideForms} from '@angular/forms';
+import {AppComponent} from './app.component';
 //import {HashLocationStrategy, LocationStrategy, ROUTER_PROVIDERS} from "@angular/router-deprecated";
 //import {provide} from "@angular/core";
 

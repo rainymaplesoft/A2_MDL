@@ -21,14 +21,26 @@
 
 </style>
 
-<style>
-    .md-list-text div {
-        white-space: normal;
-    }
-</style>
-
 <div class="view student_details flex_column">
     <header title="Student Detail" [backRoute]="backRoute" [menuAction]="{save:true}"></header>
+
+    <!--    <md-tab-group>
+            <md-tab>
+                <template md-tab-label>One</template>
+                <template md-tab-content>
+                    <h1>Some tab content</h1>
+                    <p>...</p>
+                </template>
+            </md-tab>
+            <md-tab>
+                <template md-tab-label>Two</template>
+                <template md-tab-content>
+                    <h1>Some more tab content</h1>
+                    <p>...</p>
+                </template>
+            </md-tab>
+        </md-tab-group>-->
+
     <div class="detail_tabs">
         <paper-tabs selected="0">
             <paper-tab link>
@@ -43,26 +55,38 @@
         </paper-tabs>
     </div>
     <div class="view_content">
-        <!--<router-outlet></router-outlet>-->
-        <div class="detail_tab_content flex_column max_height ">
-            <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_profile}">
-                <h2>Profile</h2>
+        <!--<router-outlet></router-outlet> (ngSubmit)="onSubmit()" #detailForm="ngForm"-->
+        <form>
+            <div class="detail_tab_content flex_column max_height ">
+                <div class="detail_profile flex_grow_max" [ngClass]="{'hide_tab':!show_profile}">
+                    <md-input placeholder="First Name" name="firstName"
+                              [(ngModel)]="student.firstName" #firstName="ngModel">
+                        <!--<md-hint align="end">required field</md-hint>-->
+                    </md-input>
+                    <md-input placeholder="Last Name" name="lastName"
+                              [(ngModel)]="student.lastName" #lastName="ngModel">
+                        <!--<md-hint align="end">required field</md-hint>-->
+                    </md-input>
+                </div>
+                <div class="detail_groups flex_grow_max" [ngClass]="{'hide_tab':!show_group}">
+                    <md-list>
+                        <md-list-item *ngFor="let group of studentGroups">
+                            <!--<img md-list-avatar src="app/assets/images/groups.png">-->
+                            <div md-list-avatar>
+                                <i class="material-icons" style="color: #4d8061;font-size: 24px;">person_add</i>
+                            </div>
+                            <div md-line> {{group.name}}</div>
+                            <div md-line>{{group.purpose}}</div>
+                            <div class="flex_item_right">
+                                <md-slide-toggle [(ngModel)]="group.selected" name="groupSelected"></md-slide-toggle>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div class="detail_objectives flex_grow_max" [ngClass]="{'hide_tab':!show_objectives}">
+                    <h2>Objectives</h2>
+                </div>
             </div>
-            <div class="detail_groups flex_grow_max" [ngClass]="{'hide_tab':!show_group}">
-                <md-list>
-                    <md-list-item *ngFor="let group of studentGroups">
-                        <img md-list-avatar src="..." alt="...">
-                        <div md-line> {{group.name}}</div>
-                        <div md-line>{{group.purpose}}</div>
-                        <div class="flex_item_right">
-                            <md-slide-toggle [(ngModel)]="group.selected"></md-slide-toggle>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </div>
-            <div class="detail_objectives flex_grow_max" [ngClass]="{'hide_tab':!show_objectives}">
-                <h2>Objectives</h2>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

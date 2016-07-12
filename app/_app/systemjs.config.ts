@@ -44,6 +44,10 @@
         'card',
         'input',
         'list',
+        'checkbox',
+        'icon',
+        'radio',
+        'tabs',
         'slide-toggle'
     ];
 

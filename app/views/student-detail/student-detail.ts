@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 import {RouteConfig, RouteParams,Router,ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {MD_TABS_DIRECTIVES } from '@angular2-material/tabs';
 import {MD_SLIDE_TOGGLE_DIRECTIVES } from '@angular2-material/slide-toggle';
 import {MD_LIST_DIRECTIVES } from '@angular2-material/list';
+import {MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import {LayoutService} from "../../services/layout.service";
 import {Header} from "../../shared_components/header/header";
 import {HttpService} from "../../data-access/http.service";
@@ -14,7 +17,11 @@ import {StudentObjectives} from "./student-objectives";
 @Component({
     selector: 'student-detail',
     templateUrl: 'app/views/student-detail/student-detail.html',
-    directives: [MD_SLIDE_TOGGLE_DIRECTIVES,MD_LIST_DIRECTIVES,Header,ROUTER_DIRECTIVES]
+    directives: [
+        ROUTER_DIRECTIVES,
+        NgForm,
+        MD_TABS_DIRECTIVES,MD_SLIDE_TOGGLE_DIRECTIVES,MD_LIST_DIRECTIVES,MD_INPUT_DIRECTIVES,
+        Header]
 })
 
 @RouteConfig([
@@ -37,13 +44,13 @@ import {StudentObjectives} from "./student-objectives";
 ])
 export class StudentDetail implements OnInit {
 
-    private studentName:string;
-    private student:Student;
-    private studentGroups:StudentGroup[];
-    private backRoute = Constants.ROUTE_STUDENTS;
-    private show_profile: boolean;
-    private show_group: boolean;
-    private show_objectives: boolean;
+     studentName:string;
+    student:Student;
+     studentGroups:StudentGroup[];
+     backRoute = Constants.ROUTE_STUDENTS;
+     show_profile: boolean;
+     show_group: boolean;
+     show_objectives: boolean;
 
     constructor(private httpService:HttpService,private router:Router,private _layoutService:LayoutService,
                 private routeParams:RouteParams) {
@@ -51,6 +58,7 @@ export class StudentDetail implements OnInit {
     }
 
     ngOnInit() {
+        this.student= new Student();
         let id = +this.routeParams.get('id');
         this.httpService.getById<Student>(Constants.URL_STUDENTS, id.toString(), 'studentId')
             .subscribe(student => {
@@ -62,6 +70,7 @@ export class StudentDetail implements OnInit {
         this.httpService.getList<StudentGroup>(Constants.URL_STUDENT_GROUPS)
             .subscribe(groups => {
                 this.studentGroups=groups;
+                console.log(this.studentGroups.length);
             });
     }
 
